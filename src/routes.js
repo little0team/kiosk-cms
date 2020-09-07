@@ -2,11 +2,12 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import DashboardLayout from './layouts/DashboardLayout';
 import ProductsPage from 'pages/ProductsPage';
-import CategoriesPage from 'pages/CatagoriesPage';
+import CategoriesPage from 'pages/category/CatagoriesPage';
 import TransactionsPage from 'pages/TransactionsPage';
 import MainLayout from 'layouts/MainLayout';
 import LoginPage from 'pages/LoginPage';
 import NotFoundPage from 'pages/NotFoundPage';
+import CategoryPage from 'pages/category/CategoryPage';
 
 const routes = [
   {
@@ -14,6 +15,7 @@ const routes = [
     element: <DashboardLayout />,
     children: [
       { path: 'categories', element: <CategoriesPage /> },
+      { path: 'category', element: <CategoryPage /> },
       { path: 'products', element: <ProductsPage /> },
       { path: 'transactions', element: <TransactionsPage /> },
     ],

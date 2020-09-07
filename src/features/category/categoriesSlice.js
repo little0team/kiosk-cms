@@ -8,7 +8,7 @@ import {
 } from '@reduxjs/toolkit';
 
 export const fetchCategories = createAsyncThunk(
-  'category/fetchCategory',
+  'categories/fetchCategories',
   async () => {
     const [fetchError, categories] = await handlePromise(apiGetCategory());
 
@@ -18,20 +18,20 @@ export const fetchCategories = createAsyncThunk(
   }
 );
 
-const categoryAdapter = createEntityAdapter({
+const categoriesAdapter = createEntityAdapter({
   selectId: (category) => category.categoryId,
 });
 
-export const { selectAll: selectCategories } = categoryAdapter.getSelectors(
-  (state) => state.category
+export const { selectAll: selectCategories } = categoriesAdapter.getSelectors(
+  (state) => state.categories
 );
 
 const categorySlice = createSlice({
-  name: 'category',
-  initialState: categoryAdapter.getInitialState(),
+  name: 'categories',
+  initialState: categoriesAdapter.getInitialState(),
   reducers: {},
   extraReducers: {
-    [fetchCategories.fulfilled]: categoryAdapter.setAll,
+    [fetchCategories.fulfilled]: categoriesAdapter.setAll,
   },
 });
 
