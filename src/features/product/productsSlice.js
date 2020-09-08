@@ -8,7 +8,7 @@ import {
 } from '@reduxjs/toolkit';
 
 export const getProductsByCategoryId = createAsyncThunk(
-  'product/getProductsByCategoryId',
+  'products/getProductsByCategoryId',
   async (categoryId) => {
     const [error, products] = await handlePromise(apiGetProducts(categoryId));
 
@@ -18,21 +18,21 @@ export const getProductsByCategoryId = createAsyncThunk(
   }
 );
 
-const productAdapter = createEntityAdapter({
-  selectId: (product) => product.productId,
+const productsAdapter = createEntityAdapter({
+  selectId: (products) => products.productId,
 });
 
-export const { selectAll: selectProducts } = productAdapter.getSelectors(
-  (state) => state.product
+export const { selectAll: selectProducts } = productsAdapter.getSelectors(
+  (state) => state.products
 );
 
-const productSlice = createSlice({
-  name: 'product',
-  initialState: productAdapter.getInitialState(),
+const productsSlice = createSlice({
+  name: 'products',
+  initialState: productsAdapter.getInitialState(),
   reducers: {},
   extraReducers: {
-    [getProductsByCategoryId.fulfilled]: productAdapter.setAll,
+    [getProductsByCategoryId.fulfilled]: productsAdapter.setAll,
   },
 });
 
-export default productSlice.reducer;
+export default productsSlice.reducer;

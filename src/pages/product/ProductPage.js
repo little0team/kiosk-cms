@@ -11,25 +11,38 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import UploadButton from 'components/UploadButton';
-import { useDispatch } from 'react-redux';
-import { createCategory } from 'features/category/categorySlice';
+import { useDispatch, useSelector } from 'react-redux';
+import DropDown from 'components/DropDown';
+import {
+  selectCategories,
+  fetchCategories,
+} from 'features/category/categoriesSlice';
+import { useEffect } from 'react';
+import { createProduct } from 'features/product/productSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
-  categoryImageItem: {
+  productImageItem: {
     width: 200,
     marginTop: 10,
     color: 'transparent',
   },
 }));
 
-const CategoryPage = ({ className, ...rest }) => {
+const ProductPage = ({ className, ...rest }) => {
   const dispatch = useDispatch();
+  const categories = useSelector(selectCategories);
   const classes = useStyles();
+  const [categorySelect, setCategorySelect] = useState(1);
   const [values, setValues] = useState({
     name: '',
+    price: 0,
     media: {},
   });
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   const handleChange = (event) => {
     setValues({
@@ -45,18 +58,26 @@ const CategoryPage = ({ className, ...rest }) => {
   const handleSubmit = () => {
     const form = new FormData();
 
+    form.append('categoryId', categorySelect);
     form.append('name', values.name);
+    form.append('price', values.price);
     form.append('image', values.media.file);
 
-    dispatch(createCategory(form));
+    dispatch(createProduct(form));
   };
 
   return (
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
-        <CardHeader subheader="Create Category" title="Category" />
+        <CardHeader subheader="Create Product" title="Product" />
         <Divider />
         <CardContent>
+          <DropDown
+            labelText="categories"
+            options={categories}
+            value={categorySelect}
+            handleChange={setCategorySelect}
+          />
           <TextField
             fullWidth
             label="Name"
@@ -67,13 +88,22 @@ const CategoryPage = ({ className, ...rest }) => {
             value={values.name}
             variant="outlined"
           />
+          <TextField
+            label="Price"
+            margin="normal"
+            name="price"
+            onChange={handleChange}
+            type="text"
+            value={values.price}
+            variant="outlined"
+          />
           <UploadButton
-            label="Category Image"
+            label="Product Image"
             handleUploadFileChange={handleUploadImage}
           />
           <div>
             <img
-              className={classes.categoryImageItem}
+              className={classes.productImageItem}
               src={values.media.url}
               alt="productImage"
             />
@@ -90,4 +120,4 @@ const CategoryPage = ({ className, ...rest }) => {
   );
 };
 
-export default CategoryPage;
+export default ProductPage;

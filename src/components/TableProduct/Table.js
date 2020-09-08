@@ -189,6 +189,8 @@ export default function TableMain({ data }) {
                       </TableCell>
 
                       <TableCell>{row.productName}</TableCell>
+
+                      <TableCell>{row.productPrice}</TableCell>
                     </TableRow>
                   );
                 })}

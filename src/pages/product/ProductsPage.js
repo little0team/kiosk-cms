@@ -11,6 +11,8 @@ import {
 } from 'features/product/productsSlice';
 import DropDown from 'components/DropDown';
 import Box from '@material-ui/core/Box';
+import ToolBar from './Toolbar';
+import { Divider } from '@material-ui/core';
 
 export default function ProductsPage() {
   const dispatch = useDispatch();
@@ -27,14 +29,22 @@ export default function ProductsPage() {
   }, [dispatch, categorySelect]);
 
   return (
-    <Box mt={3}>
-      <DropDown
-        labelText="categories"
-        options={categories}
-        value={categorySelect}
-        handleChange={setCategorySelect}
-      />
-      <Table data={products} />
-    </Box>
+    <>
+      <Box mx={3}>
+        <ToolBar />
+      </Box>
+      <Divider />
+      <Box mt={3}>
+        <DropDown
+          labelText="categories"
+          options={categories}
+          value={categorySelect}
+          handleChange={setCategorySelect}
+        />
+      </Box>
+      <Box mt={3}>
+        <Table data={products} />
+      </Box>
+    </>
   );
 }
