@@ -13,20 +13,23 @@ import DropDown from 'components/DropDown';
 import Box from '@material-ui/core/Box';
 import ToolBar from './Toolbar';
 import { Divider } from '@material-ui/core';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 export default function ProductsPage() {
   const dispatch = useDispatch();
-  const [categorySelect, setCategorySelect] = useState(1);
   const categories = useSelector(selectCategories);
+  const [categorySelect, setCategorySelect] = useState();
   const products = useSelector(selectProducts);
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    dispatch(fetchCategories())
+      .then(unwrapResult)
+      .then((categories) => setCategorySelect(categories[0]?.categoryId));
   }, [dispatch]);
 
   useEffect(() => {
     dispatch(getProductsByCategoryId(categorySelect));
-  }, [dispatch, categorySelect]);
+  }, [dispatch, categorySelect, categories]);
 
   return (
     <>

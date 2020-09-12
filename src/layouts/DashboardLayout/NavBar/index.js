@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Avatar,
@@ -8,8 +8,9 @@ import {
   Drawer,
   Hidden,
   List,
-  Typography,
   makeStyles,
+  Button,
+  Typography,
 } from '@material-ui/core';
 import {
   Box as BoxIcon,
@@ -17,11 +18,11 @@ import {
   Grid as GridIcon,
 } from 'react-feather';
 import NavItem from './NavItem';
+import AuthService from 'services/authService';
 
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Developer',
-  name: 'Super Ou',
+  name: localStorage.getItem('username'),
 };
 
 const items = [
@@ -61,6 +62,7 @@ const useStyles = makeStyles(() => ({
 const NavBar = ({ onMobileClose, openMobile, ...rest }) => {
   const classes = useStyles();
   const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -68,6 +70,12 @@ const NavBar = ({ onMobileClose, openMobile, ...rest }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
+
+  const logout = () => {
+    AuthService.signOut();
+
+    history.push('/');
+  };
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
@@ -78,12 +86,8 @@ const NavBar = ({ onMobileClose, openMobile, ...rest }) => {
           src={user.avatar}
           to="/app/account"
         />
-        <Typography className={classes.name} color="textPrimary" variant="h5">
+        <Typography variant="h6" gutterBottom>
           {user.name}
-        </Typography>
-
-        <Typography color="textSecondary" variant="body2">
-          {user.jobTitle}
         </Typography>
       </Box>
 
@@ -100,6 +104,20 @@ const NavBar = ({ onMobileClose, openMobile, ...rest }) => {
             />
           ))}
         </List>
+      </Box>
+
+      <Divider />
+
+      <Box p={1}>
+        <Button
+          variant="contained"
+          size="large"
+          color="primary"
+          fullWidth
+          onClick={logout}
+        >
+          Logout
+        </Button>
       </Box>
     </Box>
   );

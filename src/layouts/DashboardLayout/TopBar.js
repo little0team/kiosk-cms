@@ -11,7 +11,6 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import InputIcon from '@material-ui/icons/Input';
 import Logo from 'components/Logo';
 
 const useStyles = makeStyles(() => ({
@@ -28,15 +27,12 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
       <Toolbar>
-        <RouterLink to="/">
-          <Logo />
+        <RouterLink to="/app/products">
+          <IconButton color="inherit" onClick={onMobileNavOpen}>
+            <Logo onClick={onMobileNavOpen} />
+          </IconButton>
         </RouterLink>
         <Box flexGrow={1} />
-        <Hidden mdDown>
-          <IconButton color="inherit">
-            <InputIcon />
-          </IconButton>
-        </Hidden>
         <Hidden lgUp>
           <IconButton color="inherit" onClick={onMobileNavOpen}>
             <MenuIcon />
