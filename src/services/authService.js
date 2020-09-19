@@ -4,11 +4,11 @@ import apiAxios from 'apis/apiAxios';
 
 class AuthService {
   signIn = async (credentials) => {
-    const [loginErr, { accessToken }] = await handlePromise(login(credentials));
+    const [loginErr, { data }] = await handlePromise(login(credentials));
 
     if (loginErr) throw new Error();
 
-    return this.setSession(accessToken);
+    return this.setSession(data.accessToken);
   };
 
   signOut = () => {

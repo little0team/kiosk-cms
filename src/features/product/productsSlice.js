@@ -10,11 +10,11 @@ import {
 export const getProductsByCategoryId = createAsyncThunk(
   'products/getProductsByCategoryId',
   async (categoryId) => {
-    const [error, products] = await handlePromise(apiGetProducts(categoryId));
+    const [error, { data }] = await handlePromise(apiGetProducts(categoryId));
 
     if (error) throw new Error(error);
     
-    return products;
+    return data;
   }
 );
 

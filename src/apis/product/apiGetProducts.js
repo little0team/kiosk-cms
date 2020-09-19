@@ -3,7 +3,7 @@ import handlePromise from 'utils/handlePromise';
 
 export default async function apiGetProducts(categoryId) {
   const [error, products] = await handlePromise(
-    apiAxios.get(`/pos/category/${categoryId}/product`)
+    apiAxios.get(`/category/${categoryId}/product`)
   );
 
   if (error) throw new Error(error);

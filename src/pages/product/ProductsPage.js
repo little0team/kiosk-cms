@@ -24,7 +24,7 @@ export default function ProductsPage() {
   useEffect(() => {
     dispatch(fetchCategories())
       .then(unwrapResult)
-      .then((categories) => setCategorySelect(categories[0]?.categoryId));
+      .then((categories) => setCategorySelect(categories[0]?.id));
   }, [dispatch]);
 
   useEffect(() => {

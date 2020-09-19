@@ -10,16 +10,16 @@ import {
 export const fetchCategories = createAsyncThunk(
   'categories/fetchCategories',
   async () => {
-    const [fetchError, categories] = await handlePromise(apiGetCategory());
+    const [fetchError, { data }] = await handlePromise(apiGetCategory());
 
     if (fetchError) throw new Error(fetchError);
-
-    return categories;
+    
+    return data;
   }
 );
 
 const categoriesAdapter = createEntityAdapter({
-  selectId: (category) => category.categoryId,
+  selectId: (category) => category.id,
 });
 
 export const { selectAll: selectCategories } = categoriesAdapter.getSelectors(

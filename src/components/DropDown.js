@@ -34,8 +34,8 @@ function DropDown({ labelText, options, handleChange, value, disabled }) {
         onChange={handleChangeValue}
         label={labelText}
       >
-        {options.map(({ categoryId, categoryName }) => (
-          <MenuItem value={categoryId}>{categoryName}</MenuItem>
+        {options.map(({ id, name }) => (
+          <MenuItem value={id}>{name}</MenuItem>
         ))}
       </Select>
     </FormControl>

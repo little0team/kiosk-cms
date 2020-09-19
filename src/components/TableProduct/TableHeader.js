@@ -9,12 +9,12 @@ import PropTypes from 'prop-types';
 const headCells = [
   { id: 'productId', numeric: false, disablePadding: true, label: 'Id' },
   { id: 'mediaId', numeric: false, disablePadding: false, label: 'Image' },
-  {
-    id: 'categoryName',
-    numeric: false,
-    disablePadding: false,
-    label: 'Category Name',
-  },
+  // {
+  //   id: 'categoryName',
+  //   numeric: false,
+  //   disablePadding: false,
+  //   label: 'Category Name',
+  // },
   {
     id: 'productName',
     numeric: false,

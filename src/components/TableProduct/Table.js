@@ -149,17 +149,17 @@ export default function TableMain({ data }) {
               {stableSort(data, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.productId);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.productId)}
+                      onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.productId}
+                      key={row.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -170,27 +170,27 @@ export default function TableMain({ data }) {
                       </TableCell>
 
                       <TableCell component="th" id={labelId} padding="none">
-                        {row.productId}
+                        {row.id}
                       </TableCell>
 
                       <TableCell>
                         <img
                           className={classes.image}
-                          src={`${process.env.REACT_APP_API_ENDPOINT}/media/${row.mediaId}`}
+                          src={row.image}
                           alt="categoryImage"
                         />
                       </TableCell>
 
-                      <TableCell>
+                      {/* <TableCell>
                         {
-                          _.find(categories, { categoryId: row.categoryId })
-                            .categoryName
+                          _.find(categories, { id: row.id })
+                            .name
                         }
-                      </TableCell>
+                      </TableCell> */}
 
-                      <TableCell>{row.productName}</TableCell>
+                      <TableCell>{row.name}</TableCell>
 
-                      <TableCell>{row.productPrice}</TableCell>
+                      <TableCell>{row.price}</TableCell>
                     </TableRow>
                   );
                 })}
