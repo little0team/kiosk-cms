@@ -10,17 +10,15 @@ import {
 export const getProductsByCategoryId = createAsyncThunk(
   'products/getProductsByCategoryId',
   async (categoryId) => {
-    const [error, { data }] = await handlePromise(apiGetProducts(categoryId));
-
-    if (error) throw new Error(error);
+    const [error, items ] = await handlePromise(apiGetProducts(categoryId));
     
-    return data;
+    if (error) return [];
+
+    return items.data;
   }
 );
 
-const productsAdapter = createEntityAdapter({
-  selectId: (products) => products.productId,
-});
+const productsAdapter = createEntityAdapter();
 
 export const { selectAll: selectProducts } = productsAdapter.getSelectors(
   (state) => state.products

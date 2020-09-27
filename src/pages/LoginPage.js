@@ -48,7 +48,7 @@ export default function SignIn() {
 
     if (loginRes.error) return;
 
-    return history.push('/app/products');
+    return history.push('/app/dashboard');
   };
 
   const handleChange = (event) => {

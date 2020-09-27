@@ -18,9 +18,7 @@ export const fetchCategories = createAsyncThunk(
   }
 );
 
-const categoriesAdapter = createEntityAdapter({
-  selectId: (category) => category.id,
-});
+const categoriesAdapter = createEntityAdapter();
 
 export const { selectAll: selectCategories } = categoriesAdapter.getSelectors(
   (state) => state.categories
@@ -29,7 +27,9 @@ export const { selectAll: selectCategories } = categoriesAdapter.getSelectors(
 const categorySlice = createSlice({
   name: 'categories',
   initialState: categoriesAdapter.getInitialState(),
-  reducers: {},
+  reducers: {
+    categoriesAdapter
+  },
   extraReducers: {
     [fetchCategories.fulfilled]: categoriesAdapter.setAll,
   },

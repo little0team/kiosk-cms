@@ -16,6 +16,9 @@ import {
   Box as BoxIcon,
   List as ListIcon,
   Grid as GridIcon,
+  PieChart,
+  Settings,
+  Users, Home
 } from 'react-feather';
 import NavItem from './NavItem';
 import AuthService from 'services/authService';
@@ -26,6 +29,21 @@ const user = {
 };
 
 const items = [
+  {
+    href: '/app/dashboard',
+    icon: PieChart,
+    title: 'Dashboard'
+  },
+  {
+    href: '/app/branchs',
+    icon: Home,
+    title: 'Branch'
+  },
+  {
+    href: '/app/staff',
+    icon: Users,
+    title: 'Staff'
+  },
   {
     href: '/app/categories',
     icon: GridIcon,
@@ -41,6 +59,11 @@ const items = [
     icon: ListIcon,
     title: 'Transactions',
   },
+  {
+    href: '/app/config',
+    icon: Settings,
+    title: 'Config'
+  }
 ];
 
 const useStyles = makeStyles(() => ({
