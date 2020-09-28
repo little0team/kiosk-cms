@@ -18,7 +18,9 @@ import {
   Grid as GridIcon,
   PieChart,
   Settings,
-  Users, Home
+  Users,
+  Home,
+  Flag,
 } from 'react-feather';
 import NavItem from './NavItem';
 import AuthService from 'services/authService';
@@ -32,17 +34,17 @@ const items = [
   {
     href: '/app/dashboard',
     icon: PieChart,
-    title: 'Dashboard'
+    title: 'Dashboard',
   },
   {
     href: '/app/branchs',
     icon: Home,
-    title: 'Branch'
+    title: 'Branch',
   },
   {
     href: '/app/staff',
     icon: Users,
-    title: 'Staff'
+    title: 'Staff',
   },
   {
     href: '/app/categories',
@@ -60,10 +62,15 @@ const items = [
     title: 'Transactions',
   },
   {
+    href: '/app/banners',
+    icon: Flag,
+    title: 'Banner',
+  },
+  {
     href: '/app/config',
     icon: Settings,
-    title: 'Config'
-  }
+    title: 'Config',
+  },
 ];
 
 const useStyles = makeStyles(() => ({
