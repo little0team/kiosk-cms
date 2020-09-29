@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Box } from '@material-ui/core';
-import TableData from 'components/TableData';
+import Table from 'components/TableStaff/Table';
 
 export default function StaffsPage() {
   const headers = [
@@ -12,7 +12,7 @@ export default function StaffsPage() {
   return (
     <Container maxWidth={false}>
       <Box mt={3}>
-        <TableData header={headers} values={[]}></TableData>
+        <Table data={[]} />
       </Box>
     </Container>
   );

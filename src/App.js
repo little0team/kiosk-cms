@@ -22,7 +22,7 @@ import BranchsPage from 'pages/branch/BranchsPage';
 import StaffsPage from 'pages/staff/StaffsPage';
 import ConfigsPage from 'pages/config/ConfigsPage';
 import OrdersPage from 'pages/order/OrdersPage';
-import Banners from 'pages/banner/BannersPage';
+import BannersPage from 'pages/banner/BannersPage';
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
               <ProtectedRoute path="/app/branchs" component={BranchsPage} />
               <ProtectedRoute path="/app/staffs" component={StaffsPage} />
               <ProtectedRoute path="/app/branchs" component={OrdersPage} />
-              <ProtectedRoute path="/app/banners" component={Banners} />
+              <ProtectedRoute path="/app/banners" component={BannersPage} />
               <ProtectedRoute path="/app/products" component={ProductsPage} />
               <ProtectedRoute path="/app/product" component={ProductPage} />
               <ProtectedRoute

@@ -7,13 +7,18 @@ import Checkbox from '@material-ui/core/Checkbox';
 import PropTypes from 'prop-types';
 
 const headCells = [
-  { id: 'categoryId', numeric: false, disablePadding: true, label: 'Id' },
-  { id: 'mediaId', numeric: false, disablePadding: false, label: 'Branch Name' },
+  { id: 'id', numeric: false, disablePadding: false, label: 'Id' },
   {
-    id: 'categoryName',
+    id: 'username',
     numeric: false,
     disablePadding: false,
-    label: 'Branch Code',
+    label: 'Staff Username',
+  },
+  {
+    id: 'types',
+    numeric: false,
+    disablePadding: false,
+    label: 'Staff Types',
   },
 ];
 
@@ -34,14 +39,6 @@ export default function TableHeader(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
-          />
-        </TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}

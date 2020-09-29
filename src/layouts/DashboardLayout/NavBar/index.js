@@ -42,7 +42,7 @@ const items = [
     title: 'Branch',
   },
   {
-    href: '/app/staff',
+    href: '/app/staffs',
     icon: Users,
     title: 'Staff',
   },
@@ -67,7 +67,7 @@ const items = [
     title: 'Banner',
   },
   {
-    href: '/app/config',
+    href: '/app/configs',
     icon: Settings,
     title: 'Config',
   },
