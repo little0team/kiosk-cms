@@ -36,7 +36,7 @@ export default function TableBodyData({
             >
               <TableCell>{row.id}</TableCell>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{row.code}</TableCell>
+              <TableCell>{row.branchCode}</TableCell>
             </TableRow>
           );
         })}

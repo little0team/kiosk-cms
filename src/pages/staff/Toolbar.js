@@ -16,9 +16,9 @@ const Toolbar = ({ className, ...rest }) => {
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <Box display="flex" justifyContent="flex-end">
-        <Link to="/app/category">
+        <Link to="/app/branch">
           <Button color="primary" variant="contained">
-            New Category
+            New Staff
           </Button>
         </Link>
       </Box>

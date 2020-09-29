@@ -7,7 +7,7 @@ import {
 import Table from 'components/TableCategory/Table';
 import Box from '@material-ui/core/Box';
 import ToolBar from './Toolbar';
-import { Container } from '@material-ui/core';
+import { Container, Divider } from '@material-ui/core';
 
 export default function CategoriesPage() {
   const dispatch = useDispatch();
@@ -19,7 +19,10 @@ export default function CategoriesPage() {
 
   return (
     <Container maxWidth={false}>
-      <ToolBar />
+      <Box mx={3}>
+        <ToolBar />
+      </Box>
+      <Divider />
       <Box mt={3}>
         <Table data={categories} />
       </Box>

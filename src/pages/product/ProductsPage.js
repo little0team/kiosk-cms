@@ -14,6 +14,7 @@ import Box from '@material-ui/core/Box';
 import ToolBar from './Toolbar';
 import { Divider } from '@material-ui/core';
 import { unwrapResult } from '@reduxjs/toolkit';
+import { Container } from '@material-ui/core';
 
 export default function ProductsPage() {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ export default function ProductsPage() {
   }, [dispatch, categorySelect, categories]);
 
   return (
-    <>
+    <Container maxWidth={false}>
       <Box mx={3}>
         <ToolBar />
       </Box>
@@ -48,6 +49,6 @@ export default function ProductsPage() {
       <Box mt={3}>
         <Table data={products} />
       </Box>
-    </>
+    </Container>
   );
 }

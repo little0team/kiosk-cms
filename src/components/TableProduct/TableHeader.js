@@ -7,9 +7,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import PropTypes from 'prop-types';
 
 const headCells = [
-  { id: 'id', numeric: false, disablePadding: true, label: 'Id' },
-  { id: 'image', numeric: false, disablePadding: true, label: 'Image' },
-  { id: 'name', numeric: false, disablePadding: false, label: 'Product Name' },
+  { id: 'id', numeric: false, label: 'Id' },
+  { id: 'image', numeric: false,  label: 'Image' },
+  { id: 'name', numeric: false,  label: 'Product Name' },
   {
     id: 'price',
     numeric: false,

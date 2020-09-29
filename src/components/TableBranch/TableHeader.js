@@ -3,16 +3,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Checkbox from '@material-ui/core/Checkbox';
 import PropTypes from 'prop-types';
 
 const headCells = [
-  { id: 'id', numeric: false, disablePadding: true, label: 'Id' },
-  { id: 'name', numeric: false, disablePadding: false, label: 'Branch Name' },
+  { id: 'id', numeric: false,  label: 'Id' },
+  { id: 'name', numeric: false, label: 'Branch Name' },
   {
     id: 'code',
     numeric: false,
-    disablePadding: false,
     label: 'Branch Code',
   },
 ];
@@ -34,14 +32,6 @@ export default function TableHeader(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
-          />
-        </TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}

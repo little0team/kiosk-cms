@@ -27,7 +27,7 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
       <Toolbar>
-        <RouterLink to="/app/products">
+        <RouterLink to="/app/dashboard">
           <IconButton color="inherit" onClick={onMobileNavOpen}>
             <Logo onClick={onMobileNavOpen} />
           </IconButton>
