@@ -7,6 +7,7 @@ import productSlice from 'features/product/productSlice';
 import transactionSlice from 'features/transactions/transactionSlice';
 import categorySlice from 'features/category/categorySlice';
 import branchsSlice from 'features/branch/branchsSlice';
+import staffsSlice from 'features/staff/StaffsSlice';
 
 const rootReducer = combineReducers({
   login: loginSlice,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   products: productsSlice,
   product: productSlice,
   transaction: transactionSlice,
+  staffs: staffsSlice
 });
 
 export default rootReducer;

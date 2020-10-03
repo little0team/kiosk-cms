@@ -1,6 +1,5 @@
 import handlePromise from 'utils/handlePromise';
 import apiGetCategory from 'apis/category/apiGetCategory';
-
 import {
   createSlice,
   createAsyncThunk,
