@@ -3,12 +3,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Checkbox from '@material-ui/core/Checkbox';
 import PropTypes from 'prop-types';
 
 const headCells = [
   { id: 'id', numeric: false, label: 'Id' },
-  { id: 'image', numeric: false,  label: 'Banner Image' },
+  { id: 'image', numeric: false, label: 'Banner Image' },
   {
     id: 'name',
     numeric: false,
@@ -17,15 +16,7 @@ const headCells = [
 ];
 
 export default function TableHeader(props) {
-  const {
-    classes,
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };

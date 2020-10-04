@@ -6,7 +6,7 @@ import TableRow from '@material-ui/core/TableRow';
 import PropTypes from 'prop-types';
 
 const headCells = [
-  { id: 'id', numeric: false,  label: 'Id' },
+  { id: 'id', numeric: false, label: 'Id' },
   { id: 'name', numeric: false, label: 'Branch Name' },
   {
     id: 'code',
@@ -16,15 +16,7 @@ const headCells = [
 ];
 
 export default function TableHeader(props) {
-  const {
-    classes,
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
