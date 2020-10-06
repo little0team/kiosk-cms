@@ -16,7 +16,6 @@ import ProductsPage from 'pages/product/ProductsPage';
 import ProductPage from 'pages/product/ProductPage';
 import CategoriesPage from 'pages/category/CatagoriesPage';
 import CategoryPage from 'pages/category/CategoryPage';
-import TransactionsPage from 'pages/TransactionsPage';
 import DashboardPage from 'pages/dashboard/DashboardPage';
 import BranchsPage from 'pages/branch/BranchsPage';
 import StaffsPage from 'pages/staff/StaffsPage';
@@ -47,7 +46,7 @@ function App() {
               <ProtectedRoute path="/app/category" component={CategoryPage} />
               <ProtectedRoute
                 path="/app/transactions"
-                component={TransactionsPage}
+                component={OrdersPage}
               />
               <ProtectedRoute path="/app/configs" component={ConfigsPage} />
             </Switch>
