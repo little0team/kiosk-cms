@@ -1,23 +1,31 @@
 import handlePromise from 'utils/handlePromise';
-import apiGetStaffs from 'apis/staff/apiGetStaffs';
+import apiGetStaffsByBranchId from 'apis/staff/apiGetStaffsByBranchId';
 import {
   createSlice,
   createAsyncThunk,
   createEntityAdapter,
 } from '@reduxjs/toolkit';
 
-export const fetchStaffs = createAsyncThunk('staffs/fetchStaffs', async () => {
-  const [fetchError, { data }] = await handlePromise(apiGetStaffs());
+export const fetchStaffs = createAsyncThunk(
+  'staffs/fetchStaffs',
+  async (branchId) => {
+    const [fetchError, { data }] = await handlePromise(
+      apiGetStaffsByBranchId(branchId)
+    );
 
-  if (fetchError) throw new Error(fetchError);
+    if (fetchError) throw new Error(fetchError);
 
-  return data;
-});
+    return data;
+  }
+);
 
 const staffsAdapter = createEntityAdapter();
 
-export const { selectAll: selectstaffs } = staffsAdapter.getSelectors(
-  (state) => {console.log(state); return state.staffs}
+export const { selectAll: selectStaffs } = staffsAdapter.getSelectors(
+  (state) => {
+    console.log(state);
+    return state.staffs;
+  }
 );
 
 const staffSlice = createSlice({

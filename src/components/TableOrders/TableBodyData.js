@@ -2,7 +2,6 @@ import React from 'react';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import Checkbox from '@material-ui/core/Checkbox';
 import { stableSort, getComparator } from 'utils/tableHelper';
 
 export default function TableBodyData({
@@ -23,37 +22,25 @@ export default function TableBodyData({
         .map((row, index) => {
           const isItemSelected = isSelected(row.id);
           const labelId = `enhanced-table-checkbox-${index}`;
-
           return (
             <TableRow
               hover
               onClick={(event) => handleClick(event, row.id)}
-              role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
               key={row.id}
               selected={isItemSelected}
             >
-              <TableCell padding="checkbox">
-                <Checkbox
-                  checked={isItemSelected}
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </TableCell>
 
-              <TableCell component="th" id={labelId} padding="none">
+              <TableCell component="th" id={labelId}>
                 {row.id}
               </TableCell>
 
               <TableCell>
-                <img
-                  className={classes.image}
-                  src={row.image}
-                  alt="categoryImage"
-                />
+                {row.orderNo}
               </TableCell>
 
-              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.pickupType}</TableCell>
             </TableRow>
           );
         })}

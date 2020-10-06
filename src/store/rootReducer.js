@@ -4,10 +4,12 @@ import userSlice from 'features/auth/userSlice';
 import categoriesSlice from 'features/category/categoriesSlice';
 import productsSlice from 'features/product/productsSlice';
 import productSlice from 'features/product/productSlice';
-import transactionSlice from 'features/transactions/transactionSlice';
 import categorySlice from 'features/category/categorySlice';
 import branchsSlice from 'features/branch/branchsSlice';
 import staffsSlice from 'features/staff/StaffsSlice';
+import ordersSlice from 'features/order/ordersSlice';
+import bannersSlice from 'features/banner/bannersSlice';
+import configsSlice from 'features/config/configsSlice';
 
 const rootReducer = combineReducers({
   login: loginSlice,
@@ -17,8 +19,10 @@ const rootReducer = combineReducers({
   category: categorySlice,
   products: productsSlice,
   product: productSlice,
-  transaction: transactionSlice,
-  staffs: staffsSlice
+  staffs: staffsSlice,
+  orders: ordersSlice,
+  banners: bannersSlice,
+  configs: configsSlice,
 });
 
 export default rootReducer;
