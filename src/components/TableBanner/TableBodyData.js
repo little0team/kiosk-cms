@@ -2,7 +2,6 @@ import React from 'react';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import Checkbox from '@material-ui/core/Checkbox';
 import { stableSort, getComparator } from 'utils/tableHelper';
 
 export default function TableBodyData({
@@ -22,7 +21,6 @@ export default function TableBodyData({
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .map((row, index) => {
           const isItemSelected = isSelected(row.id);
-          const labelId = `enhanced-table-checkbox-${index}`;
 
           return (
             <TableRow
