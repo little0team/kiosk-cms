@@ -24,16 +24,13 @@ const useStyles = makeStyles(() => ({
 }));
 
 function OrderInfoWidget(props) {
-  const classes = useStyles();
   const [orderInfo, setOrderInfo] = useState([]);
-  
+
   useInterval(() => {
     const fetchOrderProduct = async () => {
       const [error, orderInfo] = await handlePromise(apiGetOrderInfo());
 
       if (error) return setOrderInfo([]);
-
-      //   const productChartData = formatChartData(orderProductsData);
 
       return setOrderInfo(orderInfo);
     };
@@ -41,42 +38,8 @@ function OrderInfoWidget(props) {
     fetchOrderProduct();
   }, 3000);
 
-  //   const formatChartData = (products) => {
-  //     const [labels, data] = seperateData(products);
-
-  //     return {
-  //       labels,
-  //       datasets: [
-  //         {
-  //           label: 'สินค้า',
-  //           backgroundColor: [
-  //             '#bff0ff',
-  //             '#bfd7ff',
-  //             '#ffbfd9',
-  //             '#ffccbf',
-  //             '#f5ffbf',
-  //           ],
-  //           borderWidth: 1,
-  //           data,
-  //         },
-  //       ],
-  //     };
-  //   };
-
-  //   const seperateData = (products) => {
-  //     let labels = [];
-  //     let data = [];
-
-  //     products.map((product) => {
-  //       labels.push(product.productName);
-  //       return data.push(product.totalQTY);
-  //     });
-
-  //     return [labels, data];
-  //   };
-
   return (
-    <Grid container className={classes.root} direction="row" spacing={5}>
+    <Grid container direction="row" spacing={5}>
       <Grid item md={12}>
         <CardOrderWidget
           header="ยอดสั่งซื้อทั้งหมด (บาท)"
