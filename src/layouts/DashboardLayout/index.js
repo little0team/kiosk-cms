@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import NavBar from './NavBar';
 import TopBar from './TopBar';
+import AlertMassage from 'components/AlertMessageBox';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +49,8 @@ const DashboardLayout = ({ children }) => {
           <div className={classes.content}>{children}</div>
         </div>
       </div>
+
+      <AlertMassage />
     </div>
   );
 };
