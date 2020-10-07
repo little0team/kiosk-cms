@@ -10,6 +10,7 @@ import staffsSlice from 'features/staff/StaffsSlice';
 import ordersSlice from 'features/order/ordersSlice';
 import bannersSlice from 'features/banner/bannersSlice';
 import configsSlice from 'features/config/configsSlice';
+import alertMessageSlice from 'features/dialog/alertMessageSlice';
 
 const rootReducer = combineReducers({
   login: loginSlice,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   orders: ordersSlice,
   banners: bannersSlice,
   configs: configsSlice,
+  alertMessage: alertMessageSlice,
 });
 
 export default rootReducer;

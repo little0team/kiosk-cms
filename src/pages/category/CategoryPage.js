@@ -12,7 +12,11 @@ import {
 } from '@material-ui/core';
 import UploadButton from 'components/UploadButton';
 import { useDispatch } from 'react-redux';
-import { createCategory } from 'features/category/categorySlice';
+import handlePromise from 'utils/handlePromise';
+import apiPostCategory from 'apis/category/apiPostCategory';
+import { openDialog } from 'features/dialog/alertMessageSlice';
+import { AlertType } from 'constants/alertMessageType';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -26,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const CategoryPage = ({ className, ...rest }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
   const [values, setValues] = useState({
     name: '',
     media: {},
@@ -42,13 +47,28 @@ const CategoryPage = ({ className, ...rest }) => {
     setValues({ ...values, media: file });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const form = new FormData();
 
     form.append('name', values.name);
     form.append('image', values.media.file);
 
-    dispatch(createCategory(form));
+    const [createError] = await handlePromise(apiPostCategory(form));
+
+    if (createError) {
+      return dispatch(
+        openDialog({
+          message: `เกิดข้อผิดพลาด : ${createError}`,
+          type: AlertType.ERROR,
+        })
+      );
+    }
+
+    dispatch(
+      openDialog({ message: 'เพิ่มหมวดหมู่สำเร็จ', type: AlertType.SUCCESS })
+    );
+
+    return history.push('/app/categories');
   };
 
   return (
