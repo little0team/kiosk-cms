@@ -37,7 +37,7 @@ const items = [
     title: 'Dashboard',
   },
   {
-    href: '/app/branchs',
+    href: '/app/branches',
     icon: Home,
     title: 'Branch',
   },
