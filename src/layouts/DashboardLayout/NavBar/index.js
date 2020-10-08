@@ -16,11 +16,10 @@ import {
   Box as BoxIcon,
   List as ListIcon,
   Grid as GridIcon,
+  Package,
   PieChart,
-  Settings,
   Users,
   Home,
-  Flag,
 } from 'react-feather';
 import NavItem from './NavItem';
 import AuthService from 'services/authService';
@@ -57,20 +56,25 @@ const items = [
     title: 'Products',
   },
   {
+    href: '/app/orders',
+    icon: Package,
+    title: 'Orders',
+  },
+  {
     href: '/app/transactions',
     icon: ListIcon,
     title: 'Transactions',
   },
-  {
-    href: '/app/banners',
-    icon: Flag,
-    title: 'Banner',
-  },
-  {
-    href: '/app/configs',
-    icon: Settings,
-    title: 'Config',
-  },
+  // {
+  //   href: '/app/banners',
+  //   icon: Flag,
+  //   title: 'Banner',
+  // },
+  // {
+  //   href: '/app/configs',
+  //   icon: Settings,
+  //   title: 'Config',
+  // },
 ];
 
 const useStyles = makeStyles(() => ({

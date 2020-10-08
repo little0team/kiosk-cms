@@ -11,6 +11,9 @@ function BarChart(props) {
       height={200}
       options={{
         maintainAspectRatio: false,
+        legend: {
+          display: false,
+        },
         scales: {
           yAxes: [
             {

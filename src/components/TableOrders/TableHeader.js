@@ -12,15 +12,14 @@ const headCells = [
     id: 'pickupType',
     label: 'Pickup Type',
   },
+  {
+    id: 'status',
+    label: 'Status',
+  },
 ];
 
 export default function TableHeader(props) {
-  const {
-    classes,
-    order,
-    orderBy,
-    onRequestSort,
-  } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };

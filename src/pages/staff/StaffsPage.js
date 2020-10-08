@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectStaffs, fetchStaffs } from 'features/staff/StaffsSlice';
+import { fetchStaffs } from 'features/staff/StaffsSlice';
 import { Container, Box, Divider } from '@material-ui/core';
 import Table from 'components/TableStaff/Table';
 import DropDown from 'components/DropDown';
@@ -10,9 +10,9 @@ import { unwrapResult } from '@reduxjs/toolkit';
 
 export default function StaffsPage() {
   const dispatch = useDispatch();
-  const staffs = useSelector(selectStaffs);
   const branchs = useSelector(selectBranchs);
   const [branchSelect, setBranchSelect] = useState();
+  const [staffs, setStaffs] = useState([]);
 
   useEffect(() => {
     dispatch(fetchBranchs())
@@ -21,7 +21,10 @@ export default function StaffsPage() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchStaffs(branchSelect));
+    dispatch(fetchStaffs(branchSelect))
+      .then(unwrapResult)
+      .then((staff) => setStaffs(staff))
+      .catch(() => setStaffs([]));
   }, [dispatch, branchSelect, branchs]);
 
   return (

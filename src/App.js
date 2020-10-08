@@ -47,6 +47,7 @@ function App() {
                 component={CategoriesPage}
               />
               <ProtectedRoute path="/app/category" component={CategoryPage} />
+              <ProtectedRoute path="/app/orders" component={OrdersPage} />
               <ProtectedRoute path="/app/transactions" component={OrdersPage} />
               <ProtectedRoute path="/app/configs" component={ConfigsPage} />
             </Switch>

@@ -13,7 +13,6 @@ export default function TableBodyData({
   isSelected,
   handleClick,
   emptyRows,
-  classes,
 }) {
   return (
     <TableBody>
@@ -31,16 +30,17 @@ export default function TableBodyData({
               key={row.id}
               selected={isItemSelected}
             >
-
               <TableCell component="th" id={labelId}>
                 {row.id}
               </TableCell>
 
-              <TableCell>
-                {row.orderNo}
-              </TableCell>
+              <TableCell>{row.orderNo}</TableCell>
 
               <TableCell>{row.pickupType}</TableCell>
+
+              <TableCell>
+                {row.status === 'SERVED' ? 'เสร็จสิ้น' : 'อยู่ในรายการ'}
+              </TableCell>
             </TableRow>
           );
         })}

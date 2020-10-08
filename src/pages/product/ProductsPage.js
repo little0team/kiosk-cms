@@ -5,10 +5,7 @@ import {
   selectCategories,
   fetchCategories,
 } from 'features/category/categoriesSlice';
-import {
-  getProductsByCategoryId,
-  selectProducts,
-} from 'features/product/productsSlice';
+import { getProductsByCategoryId } from 'features/product/productsSlice';
 import DropDown from 'components/DropDown';
 import Box from '@material-ui/core/Box';
 import ToolBar from './Toolbar';
@@ -20,7 +17,7 @@ export default function ProductsPage() {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
   const [categorySelect, setCategorySelect] = useState();
-  const products = useSelector(selectProducts);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     dispatch(fetchCategories())
@@ -29,7 +26,10 @@ export default function ProductsPage() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getProductsByCategoryId(categorySelect));
+    dispatch(getProductsByCategoryId(categorySelect))
+      .then(unwrapResult)
+      .then((products) => setProducts(products))
+      .catch(() => setProducts([]));
   }, [dispatch, categorySelect, categories]);
 
   return (

@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
   paper: {
     width: 'auto',
     backgroundColor: 'whitesmoke',
-    padding: 10,
+    padding: 20,
   },
 }));
 

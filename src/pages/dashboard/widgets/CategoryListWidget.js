@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
-import { Paper } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import DoughnutChart from 'components/Charts/doughnut';
 import useInterval from 'hooks/useInterval';
 import handlePromise from 'utils/handlePromise';
 import apiGetCategoryList from 'apis/dashboard/apiGetCategoryList';
+import { makeStyles } from '@material-ui/styles';
 
-function CategoryListWidget(props) {
+const useStyles = makeStyles(() => ({
+  paper: {
+    padding: 20,
+  },
+}));
+
+function CategoryListWidget() {
+  const classes = useStyles();
   const [categoryList, setOrderInfo] = useState([]);
+
   useInterval(() => {
     const fetchOrderProduct = async () => {
       const [error, categoryList] = await handlePromise(apiGetCategoryList());
@@ -54,7 +63,9 @@ function CategoryListWidget(props) {
   };
 
   return (
-    <Paper>
+    <Paper className={classes.paper}>
+      <Typography variant="h5">สรุปรายการซื้อแยกตามประเภทสินค้า</Typography>
+
       <DoughnutChart data={categoryList} />
     </Paper>
   );
