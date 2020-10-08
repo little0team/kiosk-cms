@@ -20,6 +20,7 @@ import DashboardPage from 'pages/dashboard/DashboardPage';
 import BranchsPage from 'pages/branch/BranchsPage';
 import BranchPage from 'pages/branch/BranchPage';
 import StaffsPage from 'pages/staff/StaffsPage';
+import StaffPage from 'pages/staff/StaffPage';
 import ConfigsPage from 'pages/config/ConfigsPage';
 import OrdersPage from 'pages/order/OrdersPage';
 import BannersPage from 'pages/banner/BannersPage';
@@ -36,6 +37,7 @@ function App() {
               <ProtectedRoute path="/app/dashboard" component={DashboardPage} />
               <ProtectedRoute path="/app/branches" component={BranchsPage} />
               <ProtectedRoute path="/app/staffs" component={StaffsPage} />
+              <ProtectedRoute path="/app/staff" component={StaffPage} />
               <ProtectedRoute path="/app/branch" component={BranchPage} />
               <ProtectedRoute path="/app/banners" component={BannersPage} />
               <ProtectedRoute path="/app/products" component={ProductsPage} />
