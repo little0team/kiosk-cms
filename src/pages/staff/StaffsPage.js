@@ -29,7 +29,9 @@ export default function StaffsPage() {
       <Box mx={3}>
         <ToolBar />
       </Box>
+
       <Divider />
+
       <Box mt={3}>
         <DropDown
           labelText="Branch Code"
@@ -38,6 +40,7 @@ export default function StaffsPage() {
           handleChange={setBranchSelect}
         />
       </Box>
+
       <Box mt={3}>
         <Table data={staffs} />
       </Box>
