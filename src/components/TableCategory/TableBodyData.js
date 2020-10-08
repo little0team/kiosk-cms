@@ -6,6 +6,16 @@ import { stableSort, getComparator } from 'utils/tableHelper';
 import { IconButton } from '@material-ui/core';
 import { Delete, Edit } from '@material-ui/icons';
 import { useHistory } from 'react-router';
+import handlePromise from 'utils/handlePromise';
+import apiDeleteCategory from 'apis/category/apiDeleteCategory';
+import { useDispatch } from 'react-redux';
+import { openDialog } from 'features/dialog/alertMessageSlice';
+import { AlertType } from 'constants/alertMessageType';
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
+import { fetchCategories } from 'features/category/categoriesSlice';
+
+const MySwal = withReactContent(Swal);
 
 export default function TableBodyData({
   data,
@@ -19,6 +29,42 @@ export default function TableBodyData({
   classes,
 }) {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const handleDelete = (categoryId) => {
+    MySwal.fire({
+      title: 'ลบหมวดหมู่ ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก',
+    }).then(() => {
+      deleteCategory(categoryId);
+      dispatch(fetchCategories())
+    });
+  };
+
+  const deleteCategory = async (categoryId) => {
+    const [error] = await handlePromise(apiDeleteCategory(categoryId));
+
+    if (error) {
+      dispatch(
+        openDialog({
+          message: `เกิดข้อผิดพลาด : ${error}`,
+          type: AlertType.ERROR,
+        })
+      );
+    }
+
+    return dispatch(
+      openDialog({
+        message: 'ทำรายการสำเร็จ',
+        type: AlertType.SUCCESS,
+      })
+    );
+  };
 
   return (
     <TableBody>
@@ -57,7 +103,11 @@ export default function TableBodyData({
                 >
                   <Edit />
                 </IconButton>
-                <IconButton aria-label="delete">
+
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => handleDelete(row.id)}
+                >
                   <Delete />
                 </IconButton>
               </TableCell>
