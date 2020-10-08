@@ -3,6 +3,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { stableSort, getComparator } from 'utils/tableHelper';
+import { IconButton } from '@material-ui/core';
+import { Delete, Edit } from '@material-ui/icons';
+import { useHistory } from 'react-router';
 
 export default function TableBodyData({
   data,
@@ -15,6 +18,8 @@ export default function TableBodyData({
   emptyRows,
   classes,
 }) {
+  const history = useHistory();
+
   return (
     <TableBody>
       {stableSort(data, getComparator(order, orderBy))
@@ -26,8 +31,6 @@ export default function TableBodyData({
           return (
             <TableRow
               hover
-              onClick={(event) => handleClick(event, row.id)}
-              role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
               key={row.id}
@@ -46,6 +49,18 @@ export default function TableBodyData({
               </TableCell>
 
               <TableCell>{row.name}</TableCell>
+
+              <TableCell>
+                <IconButton
+                  aria-label="edit"
+                  onClick={() => history.push(`/app/category/${row.id}`)}
+                >
+                  <Edit />
+                </IconButton>
+                <IconButton aria-label="delete">
+                  <Delete />
+                </IconButton>
+              </TableCell>
             </TableRow>
           );
         })}

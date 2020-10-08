@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import {
   Box,
@@ -16,7 +16,9 @@ import handlePromise from 'utils/handlePromise';
 import apiPostCategory from 'apis/category/apiPostCategory';
 import { openDialog } from 'features/dialog/alertMessageSlice';
 import { AlertType } from 'constants/alertMessageType';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
+import apiGetCategoryById from 'apis/category/apiGetCategoryById';
+import apiPatchCategory from 'apis/category/apiPatchCategory';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -31,10 +33,32 @@ const CategoryPage = ({ className, ...rest }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
-  const [values, setValues] = useState({
+  const { other: categoryId } = useParams();
+  const isNewCategory = categoryId === 'new';
+  const initValues = {
     name: '',
     media: {},
-  });
+  };
+  const [values, setValues] = useState(initValues);
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      const [error, { data }] = await handlePromise(
+        apiGetCategoryById(categoryId)
+      );
+
+      if (error) history.push('/app/categories');
+
+      return setValues({ name: data.name, media: { url: data.image } });
+    };
+
+    if (!isNewCategory) {
+      fetchCategory();
+    } else {
+      setValues(initValues);
+    }
+    // eslint-disable-next-line
+  }, [categoryId]);
 
   const handleChange = (event) => {
     setValues({
@@ -53,9 +77,15 @@ const CategoryPage = ({ className, ...rest }) => {
     form.append('name', values.name);
     form.append('image', values.media.file);
 
-    const [createError] = await handlePromise(apiPostCategory(form));
+    if (isNewCategory) {
+      var [createError] = await handlePromise(apiPostCategory(form));
+    } else {
+      var [updateError] = await handlePromise(
+        apiPatchCategory(categoryId, form)
+      );
+    }
 
-    if (createError) {
+    if (createError || updateError) {
       return dispatch(
         openDialog({
           message: `เกิดข้อผิดพลาด : ${createError}`,
@@ -65,7 +95,7 @@ const CategoryPage = ({ className, ...rest }) => {
     }
 
     dispatch(
-      openDialog({ message: 'เพิ่มหมวดหมู่สำเร็จ', type: AlertType.SUCCESS })
+      openDialog({ message: 'ทำรายการสำเร็จ', type: AlertType.SUCCESS })
     );
 
     return history.push('/app/categories');
@@ -75,7 +105,9 @@ const CategoryPage = ({ className, ...rest }) => {
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
         <CardHeader subheader="Create Category" title="Category" />
+
         <Divider />
+
         <CardContent>
           <TextField
             fullWidth
@@ -87,10 +119,12 @@ const CategoryPage = ({ className, ...rest }) => {
             value={values.name}
             variant="outlined"
           />
+
           <UploadButton
             label="Category Image"
             handleUploadFileChange={handleUploadImage}
           />
+
           <div>
             <img
               className={classes.categoryImageItem}
@@ -99,10 +133,12 @@ const CategoryPage = ({ className, ...rest }) => {
             />
           </div>
         </CardContent>
+
         <Divider />
+
         <Box display="flex" justifyContent="flex-end" p={2}>
           <Button color="primary" variant="contained" onClick={handleSubmit}>
-            Create
+            {!isNewCategory ? 'Update' : 'Create'}
           </Button>
         </Box>
       </Card>
