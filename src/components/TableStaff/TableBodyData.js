@@ -33,8 +33,12 @@ export default function TableBodyData({
               selected={isItemSelected}
             >
               <TableCell>{row.id}</TableCell>
+
               <TableCell>{row.username}</TableCell>
-              <TableCell>{row.types}</TableCell>
+
+              <TableCell>
+                {row.types === 'branch.master' ? 'พนักงาน' : 'ผู้จัดการ'}
+              </TableCell>
             </TableRow>
           );
         })}

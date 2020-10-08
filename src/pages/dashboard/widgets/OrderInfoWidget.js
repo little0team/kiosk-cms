@@ -3,6 +3,7 @@ import { Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import useInterval from 'hooks/useInterval';
 import handlePromise from 'utils/handlePromise';
 import apiGetOrderInfo from 'apis/dashboard/apiGetOrderInfo';
+import formatCurrency from 'utils/formatCurrency';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles(() => ({
   myPaperValue: {
     padding: 24,
     textAlign: 'center',
-    fontSize: 30
+    fontSize: 35,
   },
 }));
 
@@ -39,7 +40,7 @@ function OrderInfoWidget(props) {
   }, 3000);
 
   return (
-    <Grid container direction="row" spacing={5}>
+    <Grid container direction="row" spacing={3}>
       <Grid item md={12}>
         <CardOrderWidget
           header="ยอดสั่งซื้อทั้งหมด (บาท)"
@@ -60,7 +61,7 @@ function OrderInfoWidget(props) {
       </Grid>
       <Grid item md={6}>
         <CardOrderWidget
-          header="ยอดสั่งซื้อขึ้นต่ำของใบเสร็จ (บาท)"
+          header="ยอดสั่งซื้อขั้นต่ำของใบเสร็จ (บาท)"
           value={orderInfo.minTotalPrice}
         />
       </Grid>
@@ -78,8 +79,11 @@ function CardOrderWidget({ header, value }) {
   const classes = useStyles();
   return (
     <Paper className={classes.mypaper}>
-      <Typography variant="h6">{header}</Typography>
-      <Typography className={classes.myPaperValue}>{value}</Typography>
+      <Typography variant="body2">{header}</Typography>
+
+      <Typography className={classes.myPaperValue}>
+        {formatCurrency(value)}
+      </Typography>
     </Paper>
   );
 }
