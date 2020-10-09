@@ -22,7 +22,7 @@ import handlePromise from 'utils/handlePromise';
 import apiPostProduct from 'apis/product/apiPostProduct';
 import { openDialog } from 'features/dialog/alertMessageSlice';
 import { AlertType } from 'constants/alertMessageType';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -39,6 +39,7 @@ const ProductPage = ({ className, ...rest }) => {
   const classes = useStyles();
   const history = useHistory();
   const [categorySelect, setCategorySelect] = useState(1);
+  const { other: productId } = useParams();
   const [values, setValues] = useState({
     name: '',
     price: 0,
@@ -68,9 +69,7 @@ const ProductPage = ({ className, ...rest }) => {
     form.append('price', values.price);
     form.append('image', values.media.file);
 
-    const [error] = await handlePromise(
-      apiPostProduct(categorySelect, form)
-    );
+    const [error] = await handlePromise(apiPostProduct(categorySelect, form));
 
     if (error) {
       return dispatch(

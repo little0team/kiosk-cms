@@ -15,6 +15,12 @@ const headCells = [
     disablePadding: false,
     label: 'Product price',
   },
+  {
+    id: 'action',
+    numeric: false,
+    disablePadding: false,
+    label: '',
+  },
 ];
 
 export default function TableHeader(props) {

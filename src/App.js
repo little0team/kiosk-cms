@@ -42,7 +42,10 @@ function App() {
               <ProtectedRoute path="/app/branch" component={BranchPage} />
               <ProtectedRoute path="/app/banners" component={BannersPage} />
               <ProtectedRoute path="/app/products" component={ProductsPage} />
-              <ProtectedRoute path="/app/product" component={ProductPage} />
+              <ProtectedRoute
+                path="/app/product/:productId"
+                component={ProductPage}
+              />
               <ProtectedRoute
                 path="/app/categories"
                 component={CategoriesPage}
