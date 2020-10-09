@@ -43,7 +43,7 @@ export default function TableBodyData({
                 {row.status === 'SERVED' ? 'เสร็จสิ้น' : 'อยู่ในรายการ'}
               </TableCell>
 
-              <TableCell>{formatDate(row.createdAt)}</TableCell>
+              <TableCell>{formatDate(row.updatedAt)}</TableCell>
             </TableRow>
           );
         })}

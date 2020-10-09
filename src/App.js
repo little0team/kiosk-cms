@@ -24,6 +24,7 @@ import StaffPage from 'pages/staff/StaffPage';
 import ConfigsPage from 'pages/config/ConfigsPage';
 import OrdersPage from 'pages/order/OrdersPage';
 import BannersPage from 'pages/banner/BannersPage';
+import TransactionPage from 'pages/transaction/TransactionPage';
 
 function App() {
   return (
@@ -51,7 +52,10 @@ function App() {
                 component={CategoryPage}
               />
               <ProtectedRoute path="/app/orders" component={OrdersPage} />
-              <ProtectedRoute path="/app/transactions" component={OrdersPage} />
+              <ProtectedRoute
+                path="/app/transactions"
+                component={TransactionPage}
+              />
               <ProtectedRoute path="/app/configs" component={ConfigsPage} />
             </Switch>
           </DashBoardLayout>
