@@ -17,8 +17,8 @@ const headCells = [
     label: 'Status',
   },
   {
-    id: 'createdAt',
-    label: 'Order Date',
+    id: 'updatedAt',
+    label: 'Transaction Date',
   },
 ];
 

@@ -5,7 +5,7 @@ import Table from 'components/TableOrders/Table';
 import Box from '@material-ui/core/Box';
 import { Container } from '@material-ui/core';
 
-export default function CategoriesPage() {
+export default function OrderPage() {
   const dispatch = useDispatch();
   const orders = useSelector(selectOrders);
 
