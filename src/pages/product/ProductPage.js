@@ -118,7 +118,10 @@ const ProductPage = ({ className, ...rest }) => {
   return (
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
-        <CardHeader subheader="Create Product" title="Product" />
+        <CardHeader
+          subheader={isNewProduct ? 'Create Product' : 'Update Product'}
+          title="Product"
+        />
         <Divider />
         <CardContent>
           {isNewProduct && (

@@ -85,7 +85,7 @@ export default function TableBodyData({
               <TableCell>
                 <IconButton
                   aria-label="edit"
-                  onClick={() => history.push(`/app/product/${row.id}`)}
+                  onClick={() => history.push(`/app/staff/${row.id}`)}
                 >
                   <Edit />
                 </IconButton>

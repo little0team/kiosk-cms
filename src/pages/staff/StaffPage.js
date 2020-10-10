@@ -15,9 +15,11 @@ import DropDown from 'components/DropDown';
 import handlePromise from 'utils/handlePromise';
 import { openDialog } from 'features/dialog/alertMessageSlice';
 import { AlertType } from 'constants/alertMessageType';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { fetchBranchs, selectBranchs } from 'features/branch/branchsSlice';
 import apiPostStaff from 'apis/staff/apiPostStaff';
+import apiGetStaffById from 'apis/staff/apiGetStaffById';
+import apiPatchStaff from 'apis/staff/apiPatchStaff';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -25,13 +27,34 @@ const StaffPage = ({ className, ...rest }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
-  const [values, setValues] = useState();
+  const initValue = {
+    username: '',
+    password: '',
+  };
+  const [values, setValues] = useState(initValue);
   const [branchSelect, setBranchSelect] = useState();
   const branchs = useSelector(selectBranchs);
+  const { other: staffId } = useParams();
+  const isNewStaff = staffId === 'new';
 
   useEffect(() => {
-    dispatch(fetchBranchs());
-  }, [dispatch]);
+    const fetchStaff = async () => {
+      if (isNewStaff) {
+        dispatch(fetchBranchs());
+      } else {
+        const [error, staff] = await handlePromise(apiGetStaffById(staffId));
+
+        if (error) {
+          return setValues(staff);
+        }
+
+        return setValues(staff);
+      }
+    };
+
+    fetchStaff();
+    // eslint-disable-next-line
+  }, [staffId]);
 
   const handleChange = (event) => {
     setValues({
@@ -41,14 +64,18 @@ const StaffPage = ({ className, ...rest }) => {
   };
 
   const handleSubmit = async () => {
-    const [createError] = await handlePromise(
-      apiPostStaff(branchSelect, values)
-    );
+    if (isNewStaff) {
+      var [createError] = await handlePromise(
+        apiPostStaff(branchSelect, values)
+      );
+    } else {
+      var [updateError] = await handlePromise(apiPatchStaff(staffId, values));
+    }
 
-    if (createError) {
+    if (createError || updateError) {
       return dispatch(
         openDialog({
-          message: `เกิดข้อผิดพลาด : ${createError}`,
+          message: `เกิดข้อผิดพลาด : ${createError || updateError}`,
           type: AlertType.ERROR,
         })
       );
@@ -64,17 +91,22 @@ const StaffPage = ({ className, ...rest }) => {
   return (
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
-        <CardHeader subheader="Create Staff" title="Staff" />
+        <CardHeader
+          subheader={isNewStaff ? 'Create Staff' : 'Update Staff'}
+          title="Staff"
+        />
 
         <Divider />
 
         <CardContent>
-          <DropDown
-            labelText="Branch Code"
-            options={branchs}
-            value={branchSelect}
-            handleChange={setBranchSelect}
-          />
+          {isNewStaff && (
+            <DropDown
+              labelText="Branch Code"
+              options={branchs}
+              value={branchSelect}
+              handleChange={setBranchSelect}
+            />
+          )}
 
           <TextField
             fullWidth
@@ -87,23 +119,25 @@ const StaffPage = ({ className, ...rest }) => {
             variant="outlined"
           />
 
-          <TextField
-            fullWidth
-            label="Password"
-            margin="normal"
-            name="password"
-            onChange={handleChange}
-            type="password"
-            value={values?.password}
-            variant="outlined"
-          />
+          {isNewStaff && (
+            <TextField
+              fullWidth
+              label="Password"
+              margin="normal"
+              name="password"
+              onChange={handleChange}
+              type="password"
+              value={values?.password}
+              variant="outlined"
+            />
+          )}
         </CardContent>
 
         <Divider />
 
         <Box display="flex" justifyContent="flex-end" p={2}>
           <Button color="primary" variant="contained" onClick={handleSubmit}>
-            Create
+            {isNewStaff ? 'Create' : 'Update'}
           </Button>
         </Box>
       </Card>

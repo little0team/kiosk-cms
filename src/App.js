@@ -38,7 +38,10 @@ function App() {
               <ProtectedRoute path="/app/dashboard" component={DashboardPage} />
               <ProtectedRoute path="/app/branches" component={BranchsPage} />
               <ProtectedRoute path="/app/staffs" component={StaffsPage} />
-              <ProtectedRoute path="/app/staff" component={StaffPage} />
+              <ProtectedRoute
+                path="/app/staff/:staffId"
+                component={StaffPage}
+              />
               <ProtectedRoute
                 path="/app/branch/:branchId"
                 component={BranchPage}
