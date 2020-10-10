@@ -12,12 +12,15 @@ export default function BranchsPage() {
   useEffect(() => {
     dispatch(fetchBranchs());
   }, [dispatch]);
+
   return (
     <Container maxWidth={false}>
       <Box mx={3}>
         <Toolbar />
       </Box>
+
       <Divider />
+
       <Box mt={3}>
         <Table data={branchs} />
       </Box>
