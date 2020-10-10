@@ -58,7 +58,7 @@ const StaffPage = ({ className, ...rest }) => {
       openDialog({ message: 'เพิ่มพนักงานสำเร็จ', type: AlertType.SUCCESS })
     );
 
-    return history.push('/app/branches');
+    return history.push('/app/staffs');
   };
 
   return (

@@ -40,11 +40,11 @@ export default function TableBodyData({
       confirmButtonText: 'ตกลง',
       cancelButtonText: 'ยกเลิก',
     }).then(() => {
-      deleteCategory(productId);
+      deleteProduct(productId);
     });
   };
 
-  const deleteCategory = async (productId) => {
+  const deleteProduct = async (productId) => {
     const [error] = await handlePromise(apiDeleteProduct(productId));
 
     if (error) {
