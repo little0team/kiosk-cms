@@ -13,7 +13,7 @@ import {
   createClick,
 } from 'utils/tableHelper';
 
-export default function TableMain({ data }) {
+export default function TableMain({ data, branchId }) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -68,6 +68,7 @@ export default function TableMain({ data }) {
             />
             <TableBodyData
               data={data}
+              branchId={branchId}
               order={order}
               orderBy={orderBy}
               page={page}

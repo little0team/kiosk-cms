@@ -45,7 +45,7 @@ export default function StaffsPage() {
       </Box>
 
       <Box mt={3}>
-        <Table data={staffs} />
+        <Table data={staffs} branchId={branchSelect} />
       </Box>
     </Container>
   );

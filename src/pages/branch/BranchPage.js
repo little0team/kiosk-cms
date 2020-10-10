@@ -84,7 +84,10 @@ const BranchPage = ({ className, ...rest }) => {
   return (
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
-        <CardHeader subheader="Create Branch" title="Branch" />
+        <CardHeader
+          subheader={isNewBranch ? 'Create Branch' : 'Update Branch'}
+          title="Branch"
+        />
 
         <Divider />
 

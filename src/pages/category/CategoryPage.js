@@ -104,7 +104,10 @@ const CategoryPage = ({ className, ...rest }) => {
   return (
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
-        <CardHeader subheader="Create Category" title="Category" />
+        <CardHeader
+          subheader={isNewCategory ? 'Create Category' : 'Update Category'}
+          title="Category"
+        />
 
         <Divider />
 

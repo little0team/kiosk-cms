@@ -19,6 +19,12 @@ const headCells = [
     disablePadding: false,
     label: 'Staff Types',
   },
+  {
+    id: 'action',
+    numeric: false,
+    disablePadding: false,
+    label: '',
+  },
 ];
 
 export default function TableHeader(props) {
