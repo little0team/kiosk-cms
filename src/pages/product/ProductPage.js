@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Divider,
-  TextField,
-  makeStyles,
-} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import Divider from '@material-ui/core/Divider';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import UploadButton from 'components/UploadButton';
 import { useDispatch, useSelector } from 'react-redux';
 import DropDown from 'components/DropDown';
-import {
-  selectCategories,
-  fetchCategories,
-} from 'features/category/categoriesSlice';
 import { useEffect } from 'react';
 import handlePromise from 'utils/handlePromise';
 import apiPostProduct from 'apis/product/apiPostProduct';
 import { openDialog } from 'features/dialog/alertMessageSlice';
 import { AlertType } from 'constants/alertMessageType';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
+import apiGetProductById from 'apis/product/apiGetProductById';
+import apiPatchProduct from 'apis/product/apiPatchProduct';
+import {
+  selectCategories,
+  fetchCategories,
+} from 'features/category/categoriesSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -39,15 +39,34 @@ const ProductPage = ({ className, ...rest }) => {
   const classes = useStyles();
   const history = useHistory();
   const [categorySelect, setCategorySelect] = useState(1);
-  const [values, setValues] = useState({
+  const { other: productId } = useParams();
+  const isNewProduct = productId === 'new';
+  const initValues = {
     name: '',
+    description: '',
     price: 0,
     media: {},
-  });
+  };
+  const [values, setValues] = useState(initValues);
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    if (isNewProduct) {
+      dispatch(fetchCategories());
+    } else {
+      fetchProduct();
+    }
+    // eslint-disable-next-line
   }, [dispatch]);
+
+  const fetchProduct = async () => {
+    const [error, product] = await handlePromise(apiGetProductById(productId));
+
+    if (error) {
+      return setValues(initValues);
+    }
+
+    return setValues({ ...product, media: { url: product.image } });
+  };
 
   const handleChange = (event) => {
     setValues({
@@ -68,21 +87,29 @@ const ProductPage = ({ className, ...rest }) => {
     form.append('price', values.price);
     form.append('image', values.media.file);
 
-    const [error] = await handlePromise(
-      apiPostProduct(categorySelect, form)
-    );
+    if (isNewProduct) {
+      var [errorCreateProduct] = await handlePromise(
+        apiPostProduct(categorySelect, form)
+      );
+    } else {
+      var [errorUpdateProduct] = await handlePromise(
+        apiPatchProduct(productId, form)
+      );
+    }
 
-    if (error) {
+    if (errorCreateProduct || errorUpdateProduct) {
       return dispatch(
         openDialog({
-          message: `เกิดข้อผิดพลาด : ${error}`,
+          message: `เกิดข้อผิดพลาด : ${
+            errorCreateProduct || errorUpdateProduct
+          }`,
           type: AlertType.ERROR,
         })
       );
     }
 
     dispatch(
-      openDialog({ message: 'เพิ่มสินค้าสำเร็จ', type: AlertType.SUCCESS })
+      openDialog({ message: 'ทำรายการสำเร็จ', type: AlertType.SUCCESS })
     );
 
     return history.push('/app/products');
@@ -94,12 +121,14 @@ const ProductPage = ({ className, ...rest }) => {
         <CardHeader subheader="Create Product" title="Product" />
         <Divider />
         <CardContent>
-          <DropDown
-            labelText="categories"
-            options={categories}
-            value={categorySelect}
-            handleChange={setCategorySelect}
-          />
+          {isNewProduct && (
+            <DropDown
+              labelText="categories"
+              options={categories}
+              value={categorySelect}
+              handleChange={setCategorySelect}
+            />
+          )}
 
           <TextField
             fullWidth

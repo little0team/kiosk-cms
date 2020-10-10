@@ -37,7 +37,9 @@ export default function ProductsPage() {
       <Box mx={3}>
         <ToolBar />
       </Box>
+
       <Divider />
+
       <Box mt={3}>
         <DropDown
           labelText="categories"
@@ -46,6 +48,7 @@ export default function ProductsPage() {
           handleChange={setCategorySelect}
         />
       </Box>
+
       <Box mt={3}>
         <Table data={products} />
       </Box>
