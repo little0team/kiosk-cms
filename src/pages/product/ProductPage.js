@@ -180,7 +180,7 @@ const ProductPage = ({ className, ...rest }) => {
 
         <Box display="flex" justifyContent="flex-end" p={2}>
           <Button color="primary" variant="contained" onClick={handleSubmit}>
-            Create
+            {!isNewProduct ? 'Update' : 'Create'}
           </Button>
         </Box>
       </Card>
