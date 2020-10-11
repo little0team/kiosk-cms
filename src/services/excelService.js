@@ -12,6 +12,12 @@ export default function ExcelService(headers, data, moduleName = 'report') {
 
   addRows(worksheet, 1, data);
 
+  worksheet.getRow(1).fill = {
+    type: 'pattern',
+    pattern: 'solid',
+    fgColor: { argb: 'FF8A80' },
+  };
+
   workbook.xlsx.writeBuffer().then((data) => {
     const blob = new Blob([data], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
