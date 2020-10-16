@@ -30,6 +30,9 @@ const StaffPage = ({ className, ...rest }) => {
   const initValue = {
     username: '',
     password: '',
+    firstname: '',
+    lastname: '',
+    address: ''
   };
   const [values, setValues] = useState(initValue);
   const [branchSelect, setBranchSelect] = useState();
@@ -131,6 +134,37 @@ const StaffPage = ({ className, ...rest }) => {
               variant="outlined"
             />
           )}
+
+          <TextField
+            fullWidth
+            label="Firstname"
+            margin="normal"
+            name="firstname"
+            onChange={handleChange}
+            type="text"
+            value={values?.firstname}
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="Lastname"
+            margin="normal"
+            name="lastname"
+            onChange={handleChange}
+            type="text"
+            value={values?.lastname}
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="Address"
+            margin="normal"
+            name="address"
+            onChange={handleChange}
+            type="text"
+            value={values?.address}
+            variant="outlined"
+          />
         </CardContent>
 
         <Divider />
