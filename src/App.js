@@ -24,6 +24,7 @@ import StaffPage from 'pages/staff/StaffPage';
 import ConfigsPage from 'pages/config/ConfigsPage';
 import OrdersPage from 'pages/order/OrdersPage';
 import BannersPage from 'pages/banner/BannersPage';
+import BannerPage from 'pages/banner/BannerPage'
 import TransactionPage from 'pages/transaction/TransactionPage';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
                 component={BranchPage}
               />
               <ProtectedRoute path="/app/banners" component={BannersPage} />
+              <ProtectedRoute path="/app/banner" component={BannerPage} />
               <ProtectedRoute path="/app/products" component={ProductsPage} />
               <ProtectedRoute
                 path="/app/product/:productId"
@@ -66,6 +68,8 @@ function App() {
                 component={TransactionPage}
               />
               <ProtectedRoute path="/app/configs" component={ConfigsPage} />
+
+             
             </Switch>
           </DashBoardLayout>
         </Route>
