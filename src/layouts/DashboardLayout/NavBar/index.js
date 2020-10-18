@@ -20,6 +20,7 @@ import {
   PieChart,
   Users,
   Home,
+  Flag,
 } from 'react-feather';
 import NavItem from './NavItem';
 import AuthService from 'services/authService';
@@ -65,11 +66,11 @@ const items = [
     icon: ListIcon,
     title: 'Transactions',
   },
-  // {
-  //   href: '/app/banners',
-  //   icon: Flag,
-  //   title: 'Banner',
-  // },
+  {
+    href: '/app/banners',
+    icon: Flag,
+    title: 'Banner',
+  },
   // {
   //   href: '/app/configs',
   //   icon: Settings,
