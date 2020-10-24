@@ -7,12 +7,18 @@ import PropTypes from 'prop-types';
 
 const headCells = [
   { id: 'id', numeric: false, label: 'Id' },
-  { id: 'name', numeric: false, label: 'Branch Name' },
+  { id: 'type', numeric: false, label: 'Config Type' },
   {
-    id: 'code',
+    id: 'name',
     numeric: false,
-    label: 'Branch Code',
+    label: 'Config Name',
   },
+  {
+    id: 'value',
+    numeric: false,
+    label: 'Config Value',
+  },
+  { id: 'action', numeric: false, label: '' },
 ];
 
 export default function TableHeader(props) {

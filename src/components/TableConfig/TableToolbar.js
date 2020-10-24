@@ -55,7 +55,7 @@ export default function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Config
+          Configurations
         </Typography>
       )}
 

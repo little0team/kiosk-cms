@@ -21,6 +21,7 @@ import {
   Users,
   Home,
   Flag,
+  Settings,
 } from 'react-feather';
 import NavItem from './NavItem';
 import AuthService from 'services/authService';
@@ -71,11 +72,11 @@ const items = [
     icon: Flag,
     title: 'Banner',
   },
-  // {
-  //   href: '/app/configs',
-  //   icon: Settings,
-  //   title: 'Config',
-  // },
+  {
+    href: '/app/configs',
+    icon: Settings,
+    title: 'Config',
+  },
 ];
 
 const useStyles = makeStyles(() => ({

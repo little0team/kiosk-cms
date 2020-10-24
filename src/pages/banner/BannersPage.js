@@ -12,14 +12,14 @@ export default function BannersPage() {
     const fetchBanners = async () => {
       const [error, banners] = await handlePromise(apiGetBanners());
 
-      if (error) setBanners([]);
+      if (error) return setBanners([]);
 
       return setBanners(banners);
     };
 
     fetchBanners();
   }, []);
-  
+
   return (
     <Container maxWidth={false}>
       <Box mx={3}>
