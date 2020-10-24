@@ -13,7 +13,6 @@ import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import apiDeleteBranch from 'apis/branch/apiDeleteBranch';
 import handlePromise from 'utils/handlePromise';
-import { fetchBranchs } from 'features/branch/branchsSlice';
 
 const MySwal = withReactContent(Swal);
 
@@ -40,9 +39,10 @@ export default function TableBodyData({
       cancelButtonColor: '#d33',
       confirmButtonText: 'ตกลง',
       cancelButtonText: 'ยกเลิก',
-    }).then(() => {
-      deleteBranch(branchId);
-      return dispatch(fetchBranchs());
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteBranch(branchId);
+      }
     });
   };
 

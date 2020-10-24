@@ -13,7 +13,6 @@ import { Delete, Edit } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import handlePromise from 'utils/handlePromise';
 import apiDeleteStaff from 'apis/staff/apiDeleteStaff';
-import { fetchStaffs } from 'features/staff/StaffsSlice';
 
 const MySwal = withReactContent(Swal);
 
@@ -41,9 +40,10 @@ export default function TableBodyData({
       cancelButtonColor: '#d33',
       confirmButtonText: 'ตกลง',
       cancelButtonText: 'ยกเลิก',
-    }).then(() => {
-      deleteStaff(productId);
-      return dispatch(fetchStaffs());
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteStaff(productId);
+      }
     });
   };
 

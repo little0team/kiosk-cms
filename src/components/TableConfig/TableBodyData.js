@@ -40,8 +40,10 @@ export default function TableBodyData({
       cancelButtonColor: '#d33',
       confirmButtonText: 'ตกลง',
       cancelButtonText: 'ยกเลิก',
-    }).then(() => {
-      deleteConfig(configId);
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteConfig(configId);
+      }
     });
   };
 

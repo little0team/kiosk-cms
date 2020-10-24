@@ -7,7 +7,6 @@ import { openDialog } from 'features/dialog/alertMessageSlice';
 import { AlertType } from 'constants/alertMessageType';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
-import { fetchCategories } from 'features/category/categoriesSlice';
 import { Delete, Edit } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import handlePromise from 'utils/handlePromise';
@@ -40,9 +39,10 @@ export default function TableBodyData({
       cancelButtonColor: '#d33',
       confirmButtonText: 'ตกลง',
       cancelButtonText: 'ยกเลิก',
-    }).then(() => {
-      deleteBanner(bannerId);
-      dispatch(fetchCategories());
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteBanner(bannerId);
+      }
     });
   };
 

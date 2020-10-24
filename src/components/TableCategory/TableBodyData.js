@@ -13,7 +13,6 @@ import { openDialog } from 'features/dialog/alertMessageSlice';
 import { AlertType } from 'constants/alertMessageType';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
-import { fetchCategories } from 'features/category/categoriesSlice';
 
 const MySwal = withReactContent(Swal);
 
@@ -40,9 +39,10 @@ export default function TableBodyData({
       cancelButtonColor: '#d33',
       confirmButtonText: 'ตกลง',
       cancelButtonText: 'ยกเลิก',
-    }).then(() => {
-      deleteCategory(categoryId);
-      dispatch(fetchCategories())
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteCategory(categoryId);
+      }
     });
   };
 

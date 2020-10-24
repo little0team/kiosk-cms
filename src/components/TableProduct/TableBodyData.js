@@ -39,8 +39,10 @@ export default function TableBodyData({
       cancelButtonColor: '#d33',
       confirmButtonText: 'ตกลง',
       cancelButtonText: 'ยกเลิก',
-    }).then(() => {
-      deleteProduct(productId);
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct(productId);
+      }
     });
   };
 
