@@ -13,6 +13,11 @@ const headCells = [
     numeric: false,
     label: 'Banner Code',
   },
+  {
+    id: 'action',
+    numeric: false,
+    label: '',
+  },
 ];
 
 export default function TableHeader(props) {
