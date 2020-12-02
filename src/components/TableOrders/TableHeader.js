@@ -6,19 +6,22 @@ import TableRow from '@material-ui/core/TableRow';
 import PropTypes from 'prop-types';
 
 const headCells = [
-  { id: 'id', label: 'Id' },
-  { id: 'orderNo', label: 'Order No' },
+  { id: 'orderNo', label: 'เลขที่คำสั่งซื้อ' },
   {
     id: 'pickupType',
-    label: 'Pickup Type',
+    label: 'ประเภทรับสินค้า',
+  },
+  {
+    id: 'totalPrice',
+    label: 'ยอดเงินสุทธิ',
   },
   {
     id: 'status',
-    label: 'Status',
+    label: 'สถานะ',
   },
   {
     id: 'createdAt',
-    label: 'Order Date',
+    label: 'วันที่ทำรายการ',
   },
 ];
 

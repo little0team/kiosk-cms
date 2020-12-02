@@ -4,6 +4,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { stableSort, getComparator } from 'utils/tableHelper';
 import { formatDate } from 'utils/dateTime';
+import formatCurrency from 'utils/formatCurrency';
 
 export default function TableBodyData({
   data,
@@ -19,9 +20,9 @@ export default function TableBodyData({
     <TableBody>
       {stableSort(data, getComparator(order, orderBy))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-        .map((row, index) => {
+        .map((row) => {
           const isItemSelected = isSelected(row.id);
-          const labelId = `enhanced-table-checkbox-${index}`;
+
           return (
             <TableRow
               hover
@@ -31,13 +32,11 @@ export default function TableBodyData({
               key={row.id}
               selected={isItemSelected}
             >
-              <TableCell component="th" id={labelId}>
-                {row.id}
-              </TableCell>
-
               <TableCell>{row.orderNo}</TableCell>
 
               <TableCell>{row.pickupType}</TableCell>
+
+              <TableCell>{formatCurrency(row.totalPrice)}</TableCell>
 
               <TableCell>
                 {row.status === 'SERVED' ? 'เสร็จสิ้น' : 'อยู่ในรายการ'}
