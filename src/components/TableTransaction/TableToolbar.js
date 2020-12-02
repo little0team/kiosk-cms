@@ -55,7 +55,7 @@ export default function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Transactions (รายการที่เสร็จสิ้น)
+          รายการการที่เสร็จสิ้น
         </Typography>
       )}
 
