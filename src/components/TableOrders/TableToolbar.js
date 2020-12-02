@@ -55,7 +55,7 @@ export default function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Orders (รายการสั่งซื้อทั้งหมด)
+          รายการสั่งซื้อทั้งหมด
         </Typography>
       )}
 
