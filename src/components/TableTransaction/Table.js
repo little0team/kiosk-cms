@@ -13,7 +13,7 @@ import {
   createClick,
 } from 'utils/tableHelper';
 
-export default function TableMain({ data }) {
+export default function TableMain({ data, filter }) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -49,7 +49,7 @@ export default function TableMain({ data }) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <TableToolbar numSelected={selected.length} />
+        <TableToolbar numSelected={selected.length} filter={filter} />
         <TableContainer>
           <Table
             className={classes.table}

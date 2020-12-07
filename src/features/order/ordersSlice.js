@@ -31,6 +31,7 @@ const branchSlice = createSlice({
   },
   extraReducers: {
     [fetchOrders.fulfilled]: ordersAdapter.setAll,
+    [fetchOrders.rejected]: ordersAdapter.removeAll,
   },
 });
 
