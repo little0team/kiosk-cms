@@ -22,6 +22,10 @@ export default function OrderPage() {
     ExcelService(headers, formatDataToExport, 'Orders_Report');
   };
 
+  const orderFilter = (date) => {
+    return dispatch(fetchOrders(date));
+  };
+
   return (
     <Container maxWidth={false}>
       <Box display="flex" justifyContent="flex-end">
@@ -35,7 +39,7 @@ export default function OrderPage() {
       </Box>
 
       <Box mt={3}>
-        <Table data={orders} />
+        <Table data={orders} filter={orderFilter} />
       </Box>
     </Container>
   );

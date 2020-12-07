@@ -1,4 +1,4 @@
-import { formatDate } from 'utils/dateTime';
+import { formatDateTime } from 'utils/formatDateTime';
 
 export const headers = [
   { header: 'เลขที่รายการ', key: 'orderNo', width: 20 },
@@ -21,7 +21,7 @@ export const convertToExport = (datas) => {
     return {
       ...data,
       status: status.get(data.status),
-      createdAt: formatDate(data.createdAt),
+      createdAt: formatDateTime(data.createdAt),
     };
   });
 };

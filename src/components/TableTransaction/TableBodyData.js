@@ -3,7 +3,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { stableSort, getComparator } from 'utils/tableHelper';
-import { formatDate } from 'utils/dateTime';
+import { formatDateTime } from 'utils/formatDateTime';
 import formatCurrency from 'utils/formatCurrency';
 
 export default function TableBodyData({
@@ -42,7 +42,7 @@ export default function TableBodyData({
                 {row.status === 'SERVED' ? 'เสร็จสิ้น' : 'อยู่ในรายการ'}
               </TableCell>
 
-              <TableCell>{formatDate(row.updatedAt)}</TableCell>
+              <TableCell>{formatDateTime(row.updatedAt)}</TableCell>
             </TableRow>
           );
         })}
