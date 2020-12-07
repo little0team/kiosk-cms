@@ -1,5 +1,5 @@
 import * as dayjs from 'dayjs';
 
 export const formatDate = (date) => {
-    return dayjs(date).format('DD/MM/YYYY HH:mm')
+    return dayjs(date).format('YYYY-MM-DD')
 };

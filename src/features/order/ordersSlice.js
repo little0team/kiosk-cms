@@ -6,12 +6,16 @@ import {
 } from '@reduxjs/toolkit';
 import apiGetOrders from 'apis/order/apiGetOrders';
 
-export const fetchOrders = createAsyncThunk('orders/fetchOrders', async () => {
-  const [fetchError, { data }] = await handlePromise(apiGetOrders());
+export const fetchOrders = createAsyncThunk(
+  'orders/fetchOrders',
+  async (dateRange = '') => {
+    const [fetchError, { data }] = await handlePromise(apiGetOrders(dateRange));
 
-  if (fetchError) throw new Error(fetchError);
-  return data;
-});
+    if (fetchError) throw new Error(fetchError);
+
+    return data;
+  }
+);
 
 const ordersAdapter = createEntityAdapter();
 

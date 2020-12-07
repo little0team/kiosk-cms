@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+import { DateRangePicker } from 'materialui-daterange-picker';
+import { Divider, Grid } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import { formatDate } from 'utils/formatDate';
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -25,13 +25,40 @@ const useToolbarStyles = makeStyles((theme) => ({
           backgroundColor: theme.palette.secondary.dark,
         },
   title: {
-    flex: '1 1 100%',
+    padding: '20px',
+  },
+  datePicker: {
+    position: 'fixed',
+    left: '30%',
+  },
+  datePickerField: {
+    width: '30%',
+    margin: '10px',
   },
 }));
 
 export default function EnhancedTableToolbar(props) {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, filter } = props;
+  const [open, setOpen] = useState(false);
+  const [dateRange, setDateRange] = useState({
+    startDate: '',
+    endDate: '',
+  });
+
+  const toggle = () => setOpen(!open);
+
+  const changeDateRange = (date) => {
+    const dateRange = {
+      startDate: formatDate(date.startDate),
+      endDate: formatDate(date.endDate),
+    };
+    filter(dateRange);
+
+    setDateRange(dateRange);
+
+    return toggle();
+  };
 
   return (
     <Toolbar
@@ -39,16 +66,7 @@ export default function EnhancedTableToolbar(props) {
         [classes.highlight]: numSelected > 0,
       })}
     >
-      {numSelected > 0 ? (
-        <Typography
-          className={classes.title}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
+      <Grid container direction="column">
         <Typography
           className={classes.title}
           variant="h6"
@@ -57,21 +75,30 @@ export default function EnhancedTableToolbar(props) {
         >
           รายการสั่งซื้อทั้งหมด
         </Typography>
-      )}
 
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+        <Divider />
+
+        <TextField
+          id="date-picker"
+          label="วันที่ทำรายการ"
+          variant="outlined"
+          value={
+            dateRange.startDate &&
+            `${dateRange?.startDate} - ${dateRange?.endDate}`
+          }
+          onClick={toggle}
+          size="small"
+          className={classes.datePickerField}
+        />
+
+        <DateRangePicker
+          open={open}
+          toggle={toggle}
+          onChange={changeDateRange}
+          wrapperClassName={classes.datePicker}
+          initialDateRange={dateRange}
+        />
+      </Grid>
     </Toolbar>
   );
 }
