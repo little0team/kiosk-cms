@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link as RouterLink, useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
-  Avatar,
   Box,
   Divider,
   Drawer,
@@ -35,47 +34,47 @@ const items = [
   {
     href: '/app/dashboard',
     icon: PieChart,
-    title: 'Dashboard',
+    title: 'แดชบอร์ด',
   },
   {
     href: '/app/branches',
     icon: Home,
-    title: 'Branch',
+    title: 'จัดการสาขา',
   },
   {
     href: '/app/staffs',
     icon: Users,
-    title: 'Staff',
+    title: 'จัดการพนักงาน',
   },
   {
     href: '/app/categories',
     icon: GridIcon,
-    title: 'Categories',
+    title: 'หมวดหมู่สินค้า',
   },
   {
     href: '/app/products',
     icon: BoxIcon,
-    title: 'Products',
+    title: 'สินค้า',
   },
   {
     href: '/app/orders',
     icon: Package,
-    title: 'Orders',
+    title: 'รายการสั่งซื้อ',
   },
   {
     href: '/app/transactions',
     icon: ListIcon,
-    title: 'Transactions',
+    title: 'รายการสั่งซื้อที่เสร็จสิ้น',
   },
   {
     href: '/app/banners',
     icon: Flag,
-    title: 'Banner',
+    title: 'แบนเนอร์',
   },
   {
     href: '/app/configs',
     icon: Settings,
-    title: 'Config',
+    title: 'ตั้งค่า',
   },
 ];
 
@@ -116,12 +115,6 @@ const NavBar = ({ onMobileClose, openMobile, ...rest }) => {
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        <Avatar
-          className={classes.avatar}
-          component={RouterLink}
-          src={user.avatar}
-          to="/app/account"
-        />
         <Typography variant="h6" gutterBottom>
           {user.name}
         </Typography>
@@ -152,7 +145,7 @@ const NavBar = ({ onMobileClose, openMobile, ...rest }) => {
           fullWidth
           onClick={logout}
         >
-          Logout
+          ออกจากระบบ
         </Button>
       </Box>
     </Box>
