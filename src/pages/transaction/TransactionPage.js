@@ -14,14 +14,18 @@ export default function TransactionPage() {
     fetchTransactions();
   }, []);
 
-  const fetchTransactions = async () => {
-    const [error, transactions] = await handlePromise(apiGetTransactions());
+  const fetchTransactions = async (date = '') => {
+    const [error, transactions] = await handlePromise(apiGetTransactions(date));
 
     if (error) {
       return setTransactions([]);
     }
 
     return setTransactions(transactions);
+  };
+
+  const transactionFilter = (date) => {
+    return fetchTransactions(date);
   };
 
   const exportTransactions = () => {
@@ -43,7 +47,7 @@ export default function TransactionPage() {
       </Box>
 
       <Box mt={3}>
-        <Table data={transactions} />
+        <Table data={transactions} filter={transactionFilter} />
       </Box>
     </Container>
   );
