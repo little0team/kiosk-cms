@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Paper, Typography } from '@material-ui/core';
 import DoughnutChart from 'components/Charts/doughnut';
-import useInterval from 'hooks/useInterval';
-import handlePromise from 'utils/handlePromise';
-import apiGetCategoryList from 'apis/dashboard/apiGetCategoryList';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(() => ({
@@ -12,25 +9,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function CategoryListWidget() {
+function CategoryListWidget(props) {
   const classes = useStyles();
-  const [categoryList, setOrderInfo] = useState([]);
+  const { data } = props;
 
-  useInterval(() => {
-    const fetchOrderProduct = async () => {
-      const [error, categoryList] = await handlePromise(apiGetCategoryList());
-
-      if (error) return setOrderInfo([]);
-
-      const categoryListChartData = formatChartData(categoryList);
-
-      return setOrderInfo(categoryListChartData);
-    };
-
-    fetchOrderProduct();
-  }, 3000);
-
-  const formatChartData = (products) => {
+  const formatChartData = (products = []) => {
     const [labels, data] = seperateData(products);
 
     return {
@@ -53,6 +36,7 @@ function CategoryListWidget() {
   const seperateData = (products) => {
     let labels = [];
     let data = [];
+    products.length = 5;
 
     products.map((product) => {
       labels.push(product.orderProductName);
@@ -62,11 +46,13 @@ function CategoryListWidget() {
     return [labels, data];
   };
 
+  const categoryListChartData = formatChartData(data);
+
   return (
     <Paper className={classes.paper}>
       <Typography variant="h5">สรุปรายการซื้อแยกตามประเภทสินค้า</Typography>
 
-      <DoughnutChart data={categoryList} />
+      <DoughnutChart data={categoryListChartData} />
     </Paper>
   );
 }
