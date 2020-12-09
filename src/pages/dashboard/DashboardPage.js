@@ -32,7 +32,7 @@ export default function DashboardPage() {
 
       if (error) return setBranches([]);
 
-      return setBranches([{ id: 2, name: 'eiei' }, ...data]);
+      return setBranches(data);
     };
 
     fetchBranches();
