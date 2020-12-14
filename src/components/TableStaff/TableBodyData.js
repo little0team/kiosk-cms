@@ -74,9 +74,13 @@ export default function TableBodyData({
         .map((row, index) => {
           return (
             <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-              <TableCell>{row.id}</TableCell>
-
               <TableCell>{row.username}</TableCell>
+
+              <TableCell>
+                {row.firstname} {row.lastname}
+              </TableCell>
+
+              <TableCell>{row.address}</TableCell>
 
               <TableCell>
                 {row.types === 'branch.master' ? 'พนักงาน' : 'ผู้จัดการ'}
@@ -85,7 +89,9 @@ export default function TableBodyData({
               <TableCell>
                 <IconButton
                   aria-label="edit"
-                  onClick={() => history.push(`/app/staff/${row.id}`)}
+                  onClick={() =>
+                    history.push(`/app/staff/${row.id}/${branchId}`)
+                  }
                 >
                   <Edit />
                 </IconButton>
