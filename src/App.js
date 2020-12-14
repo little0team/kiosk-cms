@@ -34,14 +34,14 @@ function App() {
       <Switch>
         <Route path="/login" component={LoginPage} />
 
-        <Route path="/app/:path?/:other?" exact>
+        <Route path="/app/:path?/:other?/:other2?" exact>
           <DashBoardLayout>
             <Switch>
               <ProtectedRoute path="/app/dashboard" component={DashboardPage} />
               <ProtectedRoute path="/app/branches" component={BranchsPage} />
               <ProtectedRoute path="/app/staffs" component={StaffsPage} />
               <ProtectedRoute
-                path="/app/staff/:staffId"
+                path="/app/staff/:staffId/:branchId"
                 component={StaffPage}
               />
               <ProtectedRoute

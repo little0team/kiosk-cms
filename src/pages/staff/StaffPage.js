@@ -32,12 +32,12 @@ const StaffPage = ({ className, ...rest }) => {
     password: '',
     firstname: '',
     lastname: '',
-    address: ''
+    address: '',
   };
   const [values, setValues] = useState(initValue);
   const [branchSelect, setBranchSelect] = useState();
   const branchs = useSelector(selectBranchs);
-  const { other: staffId } = useParams();
+  const { other: staffId, other2: branchId } = useParams();
   const isNewStaff = staffId === 'new';
 
   useEffect(() => {
@@ -72,7 +72,9 @@ const StaffPage = ({ className, ...rest }) => {
         apiPostStaff(branchSelect, values)
       );
     } else {
-      var [updateError] = await handlePromise(apiPatchStaff(staffId, values));
+      var [updateError] = await handlePromise(
+        apiPatchStaff(staffId, branchId, values)
+      );
     }
 
     if (createError || updateError) {
@@ -85,7 +87,7 @@ const StaffPage = ({ className, ...rest }) => {
     }
 
     dispatch(
-      openDialog({ message: 'เพิ่มพนักงานสำเร็จ', type: AlertType.SUCCESS })
+      openDialog({ message: 'ทำรายการสำเร็จ', type: AlertType.SUCCESS })
     );
 
     return history.push('/app/staffs');
@@ -94,10 +96,7 @@ const StaffPage = ({ className, ...rest }) => {
   return (
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
-        <CardHeader
-          subheader={isNewStaff ? 'Create Staff' : 'Update Staff'}
-          title="Staff"
-        />
+        <CardHeader subheader={isNewStaff ? 'เพิ่ม' : 'แก้ไข'} title="Staff" />
 
         <Divider />
 

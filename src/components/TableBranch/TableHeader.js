@@ -6,7 +6,6 @@ import TableRow from '@material-ui/core/TableRow';
 import PropTypes from 'prop-types';
 
 const headCells = [
-  { id: 'id', numeric: false, label: 'Id' },
   { id: 'name', numeric: false, label: 'Branch Name' },
   {
     id: 'code',

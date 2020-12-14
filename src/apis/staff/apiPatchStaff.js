@@ -1,7 +1,14 @@
 import apiAxios from 'apis/apiAxios';
 
-export default function apiPatchStaff(staffId, data) {
+export default function apiPatchStaff(staffId, branchId, data) {
+  const { username, firstname, lastname, address } = data;
+
   return apiAxios
-    .patch(`/staff/${staffId}`, data)
+    .patch(`/branch/${branchId}/staff/${staffId}`, {
+      password: username,
+      firstname,
+      lastname,
+      address,
+    })
     .then((response) => response.data);
 }

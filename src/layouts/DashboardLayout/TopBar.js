@@ -9,20 +9,24 @@ import {
   IconButton,
   Toolbar,
   makeStyles,
+  Typography,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Logo from 'components/Logo';
 
 const useStyles = makeStyles(() => ({
   root: {},
-  avatar: {
-    width: 60,
-    height: 60,
+  merchantName: {
+    color: 'white',
   },
 }));
 
 const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
   const classes = useStyles();
+
+  const user = {
+    name: localStorage.getItem('username'),
+  };
 
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
@@ -32,7 +36,11 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
             <Logo onClick={onMobileNavOpen} />
           </IconButton>
         </RouterLink>
+
+        <Typography className={classes.merchantName}>{user.name}</Typography>
+
         <Box flexGrow={1} />
+
         <Hidden lgUp>
           <IconButton color="inherit" onClick={onMobileNavOpen}>
             <MenuIcon />

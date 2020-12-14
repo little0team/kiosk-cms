@@ -37,7 +37,7 @@ export default function StaffsPage() {
 
       <Box mt={3}>
         <DropDown
-          labelText="Branch Code"
+          labelText="สาขา"
           options={branchs}
           value={branchSelect}
           handleChange={setBranchSelect}

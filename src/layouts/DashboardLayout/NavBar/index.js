@@ -9,7 +9,6 @@ import {
   List,
   makeStyles,
   Button,
-  Typography,
 } from '@material-ui/core';
 import {
   Box as BoxIcon,
@@ -24,11 +23,6 @@ import {
 } from 'react-feather';
 import NavItem from './NavItem';
 import AuthService from 'services/authService';
-
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  name: localStorage.getItem('username'),
-};
 
 const items = [
   {
@@ -114,14 +108,6 @@ const NavBar = ({ onMobileClose, openMobile, ...rest }) => {
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
-      <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        <Typography variant="h6" gutterBottom>
-          {user.name}
-        </Typography>
-      </Box>
-
-      <Divider />
-
       <Box p={2}>
         <List>
           {items.map((item) => (
