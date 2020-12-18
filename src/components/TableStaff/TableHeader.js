@@ -25,6 +25,12 @@ const headCells = [
     label: 'ที่อยู่',
   },
   {
+    id: 'mobile',
+    numeric: false,
+    disablePadding: false,
+    label: 'เบอร์โทร',
+  },
+  {
     id: 'types',
     numeric: false,
     disablePadding: false,

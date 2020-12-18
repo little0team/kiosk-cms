@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Grid, Typography } from '@material-ui/core';
+import { Container, Grid, TextField, Typography } from '@material-ui/core';
 import AllProductWidget from './widgets/AllProductWidget';
 import OrderInfoWidget from './widgets/OrderInfoWidget';
 import CategoryListWidget from './widgets/CategoryListWidget';
@@ -12,13 +12,20 @@ import useInterval from 'hooks/useInterval';
 import handlePromise from 'utils/handlePromise';
 import apiGetDashboard from 'apis/dashboard/apiGetDashboard';
 import apiGetBranchs from 'apis/branch/apiGetBranchs';
+import { DateRangePicker } from 'materialui-daterange-picker';
 import { formatDateTime } from 'utils/formatDateTime';
+import { formatDate } from 'utils/formatDate';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    // margin: theme.spacing(1),
-    // marginTop: 10,
     minWidth: 120,
+  },
+  datePicker: {
+    position: 'fixed',
+    left: '30%',
+  },
+  datePickerField: {
+    width: '30%',
   },
 }));
 
@@ -28,6 +35,11 @@ export default function DashboardPage() {
   const [branches, setBranches] = useState([]);
   const [branchSelected, setBranchSelected] = useState('');
   const [currentDateTime, setCurrentDateTime] = useState('');
+  const [open, setOpen] = useState(false);
+  const [dateRange, setDateRange] = useState({
+    startDate: '',
+    endDate: '',
+  });
 
   useEffect(() => {
     const fetchBranches = async () => {
@@ -40,6 +52,19 @@ export default function DashboardPage() {
 
     fetchBranches();
   }, []);
+
+  const toggle = () => setOpen(!open);
+
+  const changeDateRange = (date) => {
+    const dateRange = {
+      startDate: formatDate(date.startDate),
+      endDate: formatDate(date.endDate),
+    };
+
+    setDateRange(dateRange);
+
+    return toggle();
+  };
 
   const handleChange = (event) => {
     const branchId = event.target.value;
@@ -71,7 +96,11 @@ export default function DashboardPage() {
           </Grid>
 
           <Grid item md={6}>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl
+              variant="outlined"
+              size="small"
+              className={classes.formControl}
+            >
               <InputLabel id="demo-simple-select-outlined-label">
                 สาขา
               </InputLabel>
@@ -88,6 +117,27 @@ export default function DashboardPage() {
                 ))}
               </Select>
             </FormControl>
+
+            <TextField
+              id="date-picker"
+              label="วันที่ทำรายการ"
+              variant="outlined"
+              value={
+                dateRange.startDate &&
+                `${dateRange?.startDate} - ${dateRange?.endDate}`
+              }
+              onClick={toggle}
+              size="small"
+              className={classes.datePickerField}
+            />
+
+            <DateRangePicker
+              open={open}
+              toggle={toggle}
+              onChange={changeDateRange}
+              wrapperClassName={classes.datePicker}
+              initialDateRange={dateRange}
+            />
           </Grid>
         </Grid>
 
