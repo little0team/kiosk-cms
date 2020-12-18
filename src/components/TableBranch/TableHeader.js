@@ -6,11 +6,21 @@ import TableRow from '@material-ui/core/TableRow';
 import PropTypes from 'prop-types';
 
 const headCells = [
-  { id: 'name', numeric: false, label: 'Branch Name' },
+  { id: 'name', numeric: false, label: 'ชื่อ' },
   {
     id: 'code',
     numeric: false,
-    label: 'Branch Code',
+    label: 'รหัสสาขา',
+  },
+  {
+    id: 'mobile',
+    numeric: false,
+    label: 'เบอร์โทร',
+  },
+  {
+    id: 'address',
+    numeric: false,
+    label: 'ที่อยู่',
   },
   {
     id: 'action',

@@ -77,6 +77,10 @@ export default function TableBodyData({
 
               <TableCell>{row.branchCode}</TableCell>
 
+              <TableCell>{row.mobile}</TableCell>
+
+              <TableCell>{row.address}</TableCell>
+
               <TableCell>
                 <IconButton
                   aria-label="edit"

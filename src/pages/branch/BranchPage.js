@@ -28,6 +28,8 @@ const BranchPage = ({ className, ...rest }) => {
   const initValues = {
     name: '',
     branchCode: '',
+    mobile: '',
+    address: '',
   };
   const [values, setValues] = useState(initValues);
   const { other: branchId } = useParams();
@@ -85,8 +87,8 @@ const BranchPage = ({ className, ...rest }) => {
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
         <CardHeader
-          subheader={isNewBranch ? 'Create Branch' : 'Update Branch'}
-          title="Branch"
+          subheader={isNewBranch ? 'เพิ่ม' : 'แก้ไข'}
+          title="จัดการสาขา"
         />
 
         <Divider />
@@ -94,7 +96,7 @@ const BranchPage = ({ className, ...rest }) => {
         <CardContent>
           <TextField
             fullWidth
-            label="Name"
+            label="ชื่อ"
             margin="normal"
             name="name"
             onChange={handleChange}
@@ -105,12 +107,34 @@ const BranchPage = ({ className, ...rest }) => {
 
           <TextField
             fullWidth
-            label="Branch Code"
+            label="รหัสสาขา"
             margin="normal"
             name="branchCode"
             onChange={handleChange}
             type="text"
             value={values?.branchCode}
+            variant="outlined"
+          />
+
+          <TextField
+            fullWidth
+            label="เบอร์โทรติดต่อ"
+            margin="normal"
+            name="mobile"
+            onChange={handleChange}
+            type="text"
+            value={values?.mobile}
+            variant="outlined"
+          />
+
+          <TextField
+            fullWidth
+            label="ที่อยู่สาขา"
+            margin="normal"
+            name="address"
+            onChange={handleChange}
+            type="text"
+            value={values?.address}
             variant="outlined"
           />
         </CardContent>
