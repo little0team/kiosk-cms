@@ -98,14 +98,14 @@ const StaffPage = ({ className, ...rest }) => {
   return (
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
-        <CardHeader subheader={isNewStaff ? 'เพิ่ม' : 'แก้ไข'} title="รายชื่อพนักงาน" />
+        <CardHeader subheader={isNewStaff ? 'เพิ่ม' : 'แก้ไข'} title="จัดการพนักงาน" />
 
         <Divider />
 
         <CardContent>
           {isNewStaff && (
             <DropDown
-              labelText="Branch Code"
+              labelText="รหัสสาขา"
               options={branchs}
               value={branchSelect}
               handleChange={setBranchSelect}
