@@ -28,10 +28,12 @@ const StaffPage = ({ className, ...rest }) => {
   const classes = useStyles();
   const history = useHistory();
   const initValue = {
+    type: 'branch.staff',
     username: '',
     password: '',
     firstname: '',
     lastname: '',
+    mobile: '',
     address: '',
   };
   const [values, setValues] = useState(initValue);
@@ -96,7 +98,7 @@ const StaffPage = ({ className, ...rest }) => {
   return (
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
-        <CardHeader subheader={isNewStaff ? 'เพิ่ม' : 'แก้ไข'} title="Staff" />
+        <CardHeader subheader={isNewStaff ? 'เพิ่ม' : 'แก้ไข'} title="รายชื่อพนักงาน" />
 
         <Divider />
 
@@ -136,7 +138,7 @@ const StaffPage = ({ className, ...rest }) => {
 
           <TextField
             fullWidth
-            label="Firstname"
+            label="ชื่อ"
             margin="normal"
             name="firstname"
             onChange={handleChange}
@@ -144,9 +146,10 @@ const StaffPage = ({ className, ...rest }) => {
             value={values?.firstname}
             variant="outlined"
           />
+
           <TextField
             fullWidth
-            label="Lastname"
+            label="นามสกุล"
             margin="normal"
             name="lastname"
             onChange={handleChange}
@@ -154,9 +157,21 @@ const StaffPage = ({ className, ...rest }) => {
             value={values?.lastname}
             variant="outlined"
           />
+
           <TextField
             fullWidth
-            label="Address"
+            label="เบอร์โทรติดต่อ"
+            margin="normal"
+            name="mobile"
+            onChange={handleChange}
+            type="text"
+            value={values?.mobile}
+            variant="outlined"
+          />
+
+          <TextField
+            fullWidth
+            label="ที่อยู่"
             margin="normal"
             name="address"
             onChange={handleChange}

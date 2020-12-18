@@ -82,6 +82,8 @@ export default function TableBodyData({
 
               <TableCell>{row.address}</TableCell>
 
+              <TableCell>{row.mobile}</TableCell>
+
               <TableCell>
                 {row.types === 'branch.master' ? 'พนักงาน' : 'ผู้จัดการ'}
               </TableCell>
