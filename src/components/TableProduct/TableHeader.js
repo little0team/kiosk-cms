@@ -6,14 +6,13 @@ import TableRow from '@material-ui/core/TableRow';
 import PropTypes from 'prop-types';
 
 const headCells = [
-  { id: 'id', numeric: false, label: 'Id' },
-  { id: 'image', numeric: false, label: 'Image' },
-  { id: 'name', numeric: false, label: 'Product Name' },
+  { id: 'image', numeric: false, label: 'รูป' },
+  { id: 'name', numeric: false, label: 'ชื่อ' },
   {
     id: 'price',
     numeric: false,
     disablePadding: false,
-    label: 'Product price',
+    label: 'ราคา',
   },
   {
     id: 'action',

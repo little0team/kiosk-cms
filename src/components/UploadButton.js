@@ -42,6 +42,7 @@ function UploadButtons({ label, handleUploadFileChange }) {
         type="file"
         onChange={handleChange}
       />
+
       <label htmlFor="contained-button-file">
         <Button
           variant="contained"

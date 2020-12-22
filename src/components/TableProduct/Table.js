@@ -66,6 +66,7 @@ export default function TableMain({ data }) {
               onRequestSort={handleRequestSort}
               rowCount={data.length}
             />
+
             <TableBodyData
               data={data}
               order={order}
