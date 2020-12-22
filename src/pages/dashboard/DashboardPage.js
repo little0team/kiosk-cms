@@ -18,7 +18,7 @@ import { formatDate } from 'utils/formatDate';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    minWidth: 120,
+    minWidth: 200,
   },
   datePicker: {
     position: 'fixed',
@@ -62,6 +62,7 @@ export default function DashboardPage() {
     };
 
     setDateRange(dateRange);
+    fetchDashboardData(branchSelected, dateRange);
 
     return toggle();
   };
@@ -73,9 +74,13 @@ export default function DashboardPage() {
     setBranchSelected(branchId);
   };
 
-  const fetchDashboardData = async (branchId) => {
-    const branch = { branchId };
-    const [error, data] = await handlePromise(apiGetDashboard(branch));
+  const fetchDashboardData = async (branchId, dateRange) => {
+    const query = {
+      branchId,
+      ...dateRange,
+    };
+    console.log(query)
+    const [error, data] = await handlePromise(apiGetDashboard(query));
 
     if (error) return setDataDashboard([]);
 
@@ -83,19 +88,19 @@ export default function DashboardPage() {
   };
 
   useInterval(() => {
-    fetchDashboardData(branchSelected);
+    fetchDashboardData(branchSelected, dateRange);
     setCurrentDateTime(formatDateTime());
-  }, 3000);
+  }, 5000);
 
   return (
     <Container maxWidth={false}>
       <Grid container direction="row" spacing={5}>
-        <Grid item container md={12}>
-          <Grid item md={6}>
-            <Typography>ข้อมูล ณ วันที่/เวลา {currentDateTime}</Typography>
-          </Grid>
+        <Grid item container direction="column" md={12}>
+          <Typography variant="subtitle1" align="right" gutterBottom>
+            ข้อมูล ณ วันที่/เวลา {currentDateTime}
+          </Typography>
 
-          <Grid item md={6}>
+          <Grid item container justify="space-between">
             <FormControl
               variant="outlined"
               size="small"
