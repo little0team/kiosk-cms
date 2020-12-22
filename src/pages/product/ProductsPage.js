@@ -12,6 +12,7 @@ import ToolBar from './Toolbar';
 import { Divider } from '@material-ui/core';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { Container } from '@material-ui/core';
+import { chooseCategory } from 'features/product/productSlice';
 
 export default function ProductsPage() {
   const dispatch = useDispatch();
@@ -32,6 +33,11 @@ export default function ProductsPage() {
       .catch(() => setProducts([]));
   }, [dispatch, categorySelect, categories]);
 
+  const handleCategoryChange = (categoryId) => {
+    setCategorySelect(categoryId);
+    dispatch(chooseCategory(categoryId));
+  };
+
   return (
     <Container maxWidth={false}>
       <Box mx={3}>
@@ -42,10 +48,10 @@ export default function ProductsPage() {
 
       <Box mt={3}>
         <DropDown
-          labelText="categories"
+          labelText="หมวดหมู่"
           options={categories}
           value={categorySelect}
-          handleChange={setCategorySelect}
+          handleChange={handleCategoryChange}
         />
       </Box>
 

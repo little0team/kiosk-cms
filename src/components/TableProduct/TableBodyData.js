@@ -72,8 +72,6 @@ export default function TableBodyData({
         .map((row, index) => {
           return (
             <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-              <TableCell>{row.id}</TableCell>
-
               <TableCell>
                 <img
                   className={classes.image}

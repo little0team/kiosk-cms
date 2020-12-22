@@ -18,7 +18,7 @@ const Toolbar = ({ className, ...rest }) => {
       <Box display="flex" justifyContent="flex-end">
         <Link to="/app/product/new">
           <Button color="primary" variant="contained">
-            New Product
+            เพิ่มสินค้า
           </Button>
         </Link>
       </Box>

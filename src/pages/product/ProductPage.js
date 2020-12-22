@@ -36,9 +36,12 @@ const useStyles = makeStyles((theme) => ({
 const ProductPage = ({ className, ...rest }) => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
+  const categoryIdByPass = useSelector(
+    (state) => state.product.categorySelected
+  );
   const classes = useStyles();
   const history = useHistory();
-  const [categorySelect, setCategorySelect] = useState(1);
+  const [categorySelect, setCategorySelect] = useState(categoryIdByPass);
   const { other: productId } = useParams();
   const isNewProduct = productId === 'new';
   const initValues = {
@@ -119,14 +122,14 @@ const ProductPage = ({ className, ...rest }) => {
     <form className={clsx(classes.root, className)} {...rest}>
       <Card>
         <CardHeader
-          subheader={isNewProduct ? 'Create Product' : 'Update Product'}
-          title="Product"
+          subheader={isNewProduct ? 'เพิ่ม' : 'แก้ไข'}
+          title="สินค้า"
         />
         <Divider />
         <CardContent>
           {isNewProduct && (
             <DropDown
-              labelText="categories"
+              labelText="หมวดหมู่"
               options={categories}
               value={categorySelect}
               handleChange={setCategorySelect}
@@ -135,7 +138,7 @@ const ProductPage = ({ className, ...rest }) => {
 
           <TextField
             fullWidth
-            label="Name"
+            label="ชื่อสินค้า"
             margin="normal"
             name="name"
             onChange={handleChange}
@@ -146,7 +149,7 @@ const ProductPage = ({ className, ...rest }) => {
 
           <TextField
             fullWidth
-            label="Description"
+            label="รายละเอียดสินค้า"
             margin="normal"
             name="description"
             onChange={handleChange}
@@ -156,7 +159,7 @@ const ProductPage = ({ className, ...rest }) => {
           />
 
           <TextField
-            label="Price"
+            label="ราคา"
             margin="normal"
             name="price"
             onChange={handleChange}
@@ -166,24 +169,26 @@ const ProductPage = ({ className, ...rest }) => {
           />
 
           <UploadButton
-            label="Product Image"
+            label="อัพโหลดรูปภาพ"
             handleUploadFileChange={handleUploadImage}
           />
 
-          <div>
-            <img
-              className={classes.productImageItem}
-              src={values.media.url}
-              alt="productImage"
-            />
-          </div>
+          {values.media.url && (
+            <div>
+              <img
+                className={classes.productImageItem}
+                src={values.media.url}
+                alt="productImage"
+              />
+            </div>
+          )}
         </CardContent>
 
         <Divider />
 
         <Box display="flex" justifyContent="flex-end" p={2}>
           <Button color="primary" variant="contained" onClick={handleSubmit}>
-            {!isNewProduct ? 'Update' : 'Create'}
+            {!isNewProduct ? 'แก้ไข' : 'เพิ่ม'}
           </Button>
         </Box>
       </Card>

@@ -128,13 +128,15 @@ const CategoryPage = ({ className, ...rest }) => {
             handleUploadFileChange={handleUploadImage}
           />
 
-          <div>
-            <img
-              className={classes.categoryImageItem}
-              src={values.media.url}
-              alt="productImage"
-            />
-          </div>
+          {values.media.url && (
+            <div>
+              <img
+                className={classes.categoryImageItem}
+                src={values.media.url}
+                alt="categoryImage"
+              />
+            </div>
+          )}
         </CardContent>
 
         <Divider />
